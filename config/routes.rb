@@ -1,14 +1,8 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
-  devise_scope :user do
-  # using login path for registration
-  get '/login' => 'registrations#new', :as => :new_user_registration
-  post '/signup' => 'registrations#create', :as => :user_registration
-  post '/signin' => 'sessions#create', :as => :user_session
-end
   ActiveAdmin.routes(self)
   resources :questions
-  # devise_for :users
+  devise_for :users
   get 'home/index'
   post '/solve'=>'home#solve'
   post '/evaluate'=>'home#evaluate'
@@ -17,7 +11,7 @@ end
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root to: "registrations#new"
+  root to: "home#index"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
