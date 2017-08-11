@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  content: MyText
+  constraint: MyString
+  inputtestcases: MyString
+  outputtestcases: MyString
+  marks: 1
+  difficulty: MyString
+  tag: MyString
+
+two:
+  title: MyString
+  content: MyText
+  constraint: MyString
+  inputtestcases: MyString
+  outputtestcases: MyString
+  marks: 1
+  difficulty: MyString
+  tag: MyString

@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Questions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Constraint</th>
+      <th>Inputtestcases</th>
+      <th>Outputtestcases</th>
+      <th>Marks</th>
+      <th>Difficulty</th>
+      <th>Tag</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.title %></td>
+        <td><%= question.content %></td>
+        <td><%= question.constraint %></td>
+        <td><%= question.inputtestcases %></td>
+        <td><%= question.outputtestcases %></td>
+        <td><%= question.marks %></td>
+        <td><%= question.difficulty %></td>
+        <td><%= question.tag %></td>
+        <td><%= link_to 'Show', question %></td>
+        <td><%= link_to 'Edit', edit_question_path(question) %></td>
+        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Solve',url_for(controller: :home,action: :solve, id: question.id), method: :post %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Question', new_question_path %>
