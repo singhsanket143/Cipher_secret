@@ -11,5 +11,9 @@ ActiveAdmin.register Question do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-
+permit_params do
+    params = [:title, :content, :constraint, :inputtestcases, :outputtestcases, :marks, :difficulty, :tag]
+    # params.push :author_id if current_user.admin?
+    params
+  end
 end
