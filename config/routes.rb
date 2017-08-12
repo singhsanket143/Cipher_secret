@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :questions
   devise_for :users
   get 'home/index'
+  get '/users'=>"home#index"
   post '/solve'=>'home#solve'
   post '/evaluate'=>'home#evaluate'
   # The priority is based upon order of creation: first created -> highest priority.

@@ -361,22 +361,22 @@
         -ms-transform: translate(50%, -50%) rotate(0deg);
       }
       @keyframes focus {
-  0% {
-    -webkit-filter:blur(20px);
-  }
-  33% {
-    -webkit-filter:blur(0);
-  }
-  66% {
-    -webkit-filter:blur(0);
-  }
-  100% {
-    -webkit-filter:blur(20px);
-  }
-}
+        0% {
+          -webkit-filter:blur(20px);
+        }
+        33% {
+          -webkit-filter:blur(0);
+        }
+        66% {
+          -webkit-filter:blur(0);
+        }
+        100% {
+          -webkit-filter:blur(20px);
+        }
+      }
 
       body {
-        background-image: url(/assets/2.jpg);
+        background-image: url("/assets/2.jpg");
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
@@ -446,10 +446,10 @@
           </button>
         </div>
         <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-          <%= link_to "Forgot your password?", new_password_path(resource_name),class:"pass-forgot" %><br />
+        <%= link_to "Forgot your password?", new_password_path(resource_name),class:"pass-forgot" %><br/>
         <% end -%>
         <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-          <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name),class:"pass-forgot" %><br />
+        <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name),class:"pass-forgot" %><br/>
         <% end -%>
         <div style="margin-right:150px;">
           <%= f.check_box :remember_me %>
@@ -457,12 +457,13 @@
         </div>
 
       </div>
-<%end%>
+      <%end%>
       <div class="overbox">
         <div class="material-button alt-2">
           <span class="shape"><%= link_to "", new_user_registration_path, :remote => true %></span>
         </div>
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        
         <div class="title">REGISTER</div>
 
         <div class="input">
@@ -493,7 +494,7 @@
         </div>
 
       </div>
-<% end %>
+      <% end %>
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
