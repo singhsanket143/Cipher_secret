@@ -10,7 +10,7 @@
       <style media="screen">
          @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900);
       body {
-        background: #dce1df;
+        background: #fff;
         color: #4f585e;
         font-family: 'Source Sans Pro', sans-serif;
         text-rendering: optimizeLegibility;
@@ -59,9 +59,59 @@
         position: relative;
         text-align: left;
         -webkit-transition: all 0.3s 0s ease-in;
-        transition: all 0.3s 0s ease-in;
-        z-index: 1;
+        transform-style: flat;
+  transition: all 250ms ease-out;
       }
+
+.card:before, .card:after {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  transition: all 250ms ease-out;
+}
+
+/* Paper effect – slightly raised off background */
+.paper {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(128, 128, 128, 0.1) inset;
+  border-color: #dedede;
+}
+
+
+
+/* Flatten effect – flattens sides on hover */
+.paper-flatten {
+  border: 1px solid transparent;
+}
+.paper-flatten:before, .paper-flatten:after {
+  bottom: 15px;
+  width: 50%;
+  height: 20%;
+  max-width: 300px;
+  max-height: 100px;
+  box-shadow: 0 22px 20px rgba(31, 31, 31, 0.7);
+}
+.paper-flatten:before {
+  left: 10px;
+  transform: rotate(-3deg);
+}
+.paper-flatten:after {
+  right: 10px;
+  transform: rotate(3deg);
+}
+.paper-flatten:hover {
+  border-color: #ccc;
+}
+.paper-flatten:hover:before, .paper-flatten:hover:after {
+  transition: box-shadow 600ms ease-out, left 200ms, right 200ms;
+  box-shadow: 0 8px 8px rgba(31, 31, 31, 0.5);
+}
+.paper-flatten:hover:before {
+  left: 5px;
+}
+.paper-flatten:hover:after {
+  right: 5px;
+}
+
       div.card img {
         max-width: 300px;
       }
@@ -191,7 +241,7 @@
  <%= link_to 'New Question', new_question_path %>
   <div class="cards">
    <% @questions.each do |question| %>
-  <div class="card paper paper-raise-flatten">
+  <div class="card paper-flatten">
     <img src="http://s4c.cymru/temp/wave3.jpg">
     <div class="card-title">
       <a href="#" class="toggle-info btn">
