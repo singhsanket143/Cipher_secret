@@ -1,0 +1,759 @@
+
+
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>#003: Landing Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
+
+    <style type="text/css">
+
+      @import "https://fonts.googleapis.com/css?family=Open+Sans:400,600|Roboto+Slab:300,400";
+      html {
+        box-sizing: border-box;
+      }
+
+      *,
+      *::after,
+      *::before {
+        box-sizing: inherit;
+      }
+
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      body,
+      html {
+        height: 100%;
+        width: 100%;
+      }
+
+      html {
+        font-size: 1em;
+      }
+      @media (max-width: 30em) {
+        html {
+          font-size: 1.125em;
+        }
+      }
+
+      body {
+        background-image: url("https://images.unsplash.com/photo-1450387535869-eae5b226b40f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=29289ec343b1f2f25e120e293b051074");
+        background-size: cover;
+        color: #9CA5AC;
+        font-family: 'Open Sans', sans-serif;
+      }
+      @media (min-width: 60em) {
+        body {
+          padding: 2rem 0 0;
+        }
+      }
+
+      section {
+        position: relative;
+      }
+
+      a,
+      button {
+        cursor: pointer;
+      }
+
+      ::-moz-selection {
+        background: #4A5353;
+        color: #FEFEFE;
+      }
+
+      ::selection {
+        background: #4A5353;
+        color: #FEFEFE;
+      }
+
+      .primary-bg {
+        background-image: url("https://images.unsplash.com/photo-1450387535869-eae5b226b40f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=29289ec343b1f2f25e120e293b051074");
+        background-size: cover;
+        background-position: bottom;
+        background-position-x: 30%;
+      }
+
+      .secondary-bg {
+        background-color: #FEFEFE;
+      }
+
+      .container {
+        padding: 0 5%;
+      }
+
+      .triangle {
+        border-style: solid;
+        border-width: 0 0 6rem 60rem;
+        border-color: transparent transparent #FEFEFE transparent;
+        height: 0;
+        position: absolute;
+        top: -6rem;
+        width: 0;
+      }
+
+      .brand-text {
+        -webkit-transition: 250ms ease-in-out;
+        transition: 250ms ease-in-out;
+        display: inline-block;
+        font-family: 'Roboto Slab', serif;
+        font-size: 1.75rem;
+        font-weight: 300;
+      }
+      .brand-text span {
+        font-weight: 400;
+      }
+      .brand-text:hover {
+        color: #D1D6D4;
+      }
+
+      .trigger {
+        text-align: right;
+      }
+
+      .menu {
+        list-style: none;
+        text-align: right;
+      }
+      .menu__item {
+        border-bottom: 1px dotted #77908B;
+        line-height: 1.25;
+      }
+      .menu__item:last-child {
+        border-bottom: none;
+      }
+      .menu__link {
+        -webkit-transition: 250ms ease-in-out;
+        transition: 250ms ease-in-out;
+        display: block;
+        padding: 0.5rem 0;
+      }
+      .menu__link:hover {
+        color: #D1D6D4;
+      }
+      @media (min-width: 48em) {
+        .menu__item,
+        .menu__link {
+          display: inline-block;
+        }
+        .menu__item {
+          border: none;
+          text-transform: uppercase;
+        }
+        .menu__link {
+          margin-right: 0.5rem;
+        }
+      }
+
+      .lead {
+        color: #FEFEFE;
+        font-size: 1.125rem;
+        line-height: 1.5;
+      }
+
+      .button {
+        -webkit-transition: 250ms ease-in-out;
+        transition: 250ms ease-in-out;
+        background-color: #00a778;
+        border: none;
+        border-radius: 1rem;
+        color: #FEFEFE;
+        cursor: pointer;
+        font-size: 0.9rem;
+        padding: 0.5rem 1.75rem;
+        text-transform: uppercase;
+      }
+      .button:focus,
+      .button:hover {
+        outline: none;
+        background-color: #40bd9a;
+      }
+
+      .headline {
+        color: #00a778;
+        font-weight: normal;
+        line-height: 1.25;
+      }
+
+      .landing {
+        max-width: 60em;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #FEFEFE;
+        box-shadow: 0 0 1em #000;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative;
+      }
+      .landing::after {
+        clear: both;
+        content: "";
+        display: block;
+      }
+      .landing .header {
+        left: 0;
+        position: absolute;
+        top: 1rem;
+        width: 100%;
+        z-index: 10;
+      }
+      .landing .nav {
+        color: #FEFEFE;
+      }
+      .landing .nav__header {
+        display: table;
+        height: 3rem;
+        width: 100%;
+        padding: 0 5%;
+      }
+      .landing .nav__header .brand-text,
+      .landing .nav__header .trigger {
+        display: table-cell;
+        vertical-align: middle;
+      }
+      .landing .nav__header .trigger {
+        font-size: 2rem;
+        color: #00a778;
+      }
+      .landing .nav__menu {
+        background-color: rgba(74, 83, 83, 0.5);
+        border-bottom: 2px solid #00a778;
+        display: none;
+        margin-top: 1rem;
+      }
+      @media (min-width: 48em) {
+        .landing .nav .trigger {
+          display: none;
+        }
+        .landing .nav__menu {
+          background: none;
+          border: none;
+          display: block !important;
+          float: right;
+          margin-top: auto;
+          min-width: 22rem;
+          position: relative;
+          right: 1.25rem;
+          top: -2.65rem;
+        }
+      }
+      .landing .content {
+        padding-top: 3rem;
+      }
+      .landing .action {
+        max-width: 17rem;
+        padding: 12rem 0 3rem;
+        position: relative;
+        z-index: 10;
+      }
+      .landing .action > * + * {
+        margin-top: 1rem;
+      }
+      .landing .boon {
+        max-width: 30em;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1rem 0 2rem;
+        text-align: center;
+      }
+      .landing .boon::after {
+        clear: both;
+        content: "";
+        display: block;
+      }
+      .landing .boon .headline {
+        margin-bottom: 2rem;
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <!-- Landing Page-->
+    <div class="landing">
+      <!-- Header-->
+      <header class="header" role="banner">
+        <!-- Navigation-->
+        <nav class="nav">
+          <!-- Navigation header-->
+          <div class="nav__header">
+            <!-- Brand text-->
+            <h1 class="brand-text">
+              <a>Cipher<span>Secret</span>
+              </a>
+            </h1>
+            <!-- Navigation menu trigger-->
+            <a class="trigger" id="js-nav-trigger">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </a>
+          </div>
+          <!-- Navigation menu-->
+          <div class="nav__menu">
+            <div class="container">
+              <ul class="menu">
+                <li class="menu__item">
+                  <a class="menu__link">Features</a>
+                </li>
+                <li class="menu__item">
+                  <a class="menu__link">About</a>
+                </li>
+                <li class="menu__item">
+                  <a class="menu__link">Pricing</a>
+                </li>
+                <li class="menu__item">
+                  <%- if controller_name != 'sessions' %>
+                <a><strong>  <%= link_to "Log in", new_user_session_path ,class:"menu__link"%></strong></a>
+                  <% end -%>
+                  <!-- <a class="menu__link">Sign in</a> -->
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <!-- Content-->
+      <main class="content primary-bg" role="main">
+        <section>
+          <div class="container">
+            <!-- Action-->
+            <div class="action">
+              <!-- Action lead-->
+              <p class="lead">Lorem ipsum dolor sit amet, consetetur sadipscing eltir, sed diam nonumy eirmod tempor.</p>
+              <!-- Action button--><br>
+              <%= link_to "Log in", new_user_session_path ,class:"button"%>
+            </div>
+          </div>
+        </section>
+        <section class="secondary-bg">
+          <div class="triangle"></div>
+          <div class="container">
+            <!-- Supplementary-->
+            <div class="boon">
+              <!-- Boon headline-->
+              <h1 class="headline">Connect with over 67 million travelers</h1>
+              <!-- Boon text-->
+              <p>Lorem ipsum dolor sit amet, consetetur sadipscing eltir, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+            </div>
+          </div>
+
+          <div class="centerflipcards">
+
+            <style type="text/css">
+
+              .square-flip {
+                -webkit-perspective: 1000;
+                -moz-perspective: 1000;
+                -ms-perspective: 1000;
+                perspective: 1000;
+
+                -webkit-transform: perspective(1000px);
+                -moz-transform: perspective(1000px);
+                -ms-transform: perspective(1000px);
+                transform: perspective(1000px);
+
+                -webkit-transform-style: preserve-3d;
+                -moz-transform-style: preserve-3d;
+                -ms-transform-style: preserve-3d;
+                transform-style: preserve-3d;
+
+                /*border:1px solid #efefef;*/
+
+                position: relative;
+                float: left;
+                margin: 20px;
+
+              }
+              .square-flip {
+                width: 350px;
+                height: 350px;
+              }
+              .square,
+              .square2 {
+                width: 100%;
+                height: 100%;
+              }
+              .square {
+
+                background-size: cover;
+                background-position: center center;
+
+                -ms-transition: transform 0.60s cubic-bezier(.5,.3,.3,1);
+                transition: transform 0.60s cubic-bezier(.5,.3,.3,1);
+                -webkit-transition: transform 0.60s cubic-bezier(.5,.3,.3,1);
+                overflow: hidden;
+
+                position: absolute;
+                top: 0;
+
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+              }
+              .square-flip .square {
+                -webkit-transform: rotateY(0deg);
+                -moz-transform: rotateY(0deg);
+                -o-transform: rotateY(0deg);
+                -ms-transform: rotateY(0deg);
+                transform: rotateY(0deg);
+                transform-style: preserve-3d;
+                z-index: 1;
+              }
+              .square-flip:hover .square {
+                -webkit-transform: rotateY(-180deg);
+                -moz-transform: rotateY(-180deg);
+                -o-transform: rotateY(-180deg);
+                -ms-transform: rotateY(-180deg);
+                transform: rotateY(-180deg);
+                transform-style: preserve-3d;
+              }
+
+              .square2 {
+
+                background-size: cover;
+                background-position: center center;
+
+                -ms-transition: transform 0.60s cubic-bezier(.5,.3,.3,1);
+                transition: transform 0.60s cubic-bezier(.5,.3,.3,1);
+                -webkit-transition: transform 0.60s cubic-bezier(.5,.3,.3,1);
+                overflow: hidden;
+
+                position: absolute;
+                top: 0;
+
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+              }
+              .square-flip .square2 {
+                -webkit-transform: rotateY(180deg);
+                -moz-transform: rotateY(180deg);
+                -o-transform: rotateY(180deg);
+                -ms-transform: rotateY(180deg);
+                transform: rotateY(180deg);
+                transform-style: preserve-3d;
+                z-index: 1;
+              }
+              .square-flip:hover .square2 {
+                -webkit-transform: rotateY(0deg);
+                -moz-transform: rotateY(0deg);
+                -o-transform: rotateY(0deg);
+                -ms-transform: rotateY(0deg);
+                transform: rotateY(0deg);
+                transform-style: preserve-3d;
+              }
+
+              /*Square content*/
+              .square-container {
+                padding: 40px;
+                text-align: center;
+                position: relative;
+                top: 50%;
+
+                -ms-transition: transform 0.60s cubic-bezier(.5,.3,.3,1);
+                transition: transform 0.60s cubic-bezier(.5,.3,.3,1);
+                -webkit-transition: transform 0.60s cubic-bezier(.5,.3,.3,1);
+
+                -webkit-transform: translateY(-50%) translateX(0px) scale(1);
+                -ms-transform: translateY(-50%) translateX(0px) scale(1);
+                transform: translateY(-50%) translateX(0px) scale(1);
+                transform-style: preserve-3d;
+                z-index: 2;
+              }
+              .square-flip:hover .square-container {
+
+                -webkit-transform: translateY(-50%) translateX(-650px) scale(.88);
+                -ms-transform: translateY(-50%) translateX(-650px) scale(.88);
+                transform: translateY(-50%) translateX(-650px) scale(.88);
+                transform-style: preserve-3d;
+
+              }
+
+              .square-container2 {
+                padding: 40px;
+                text-align: center;
+                position: relative;
+                top: 50%;
+
+                -ms-transition: transform 0.60s cubic-bezier(.5,.3,.3,1);
+                transition: transform 0.60s cubic-bezier(.5,.3,.3,1);
+                -webkit-transition: transform 0.60s cubic-bezier(.5,.3,.3,1);
+
+                -webkit-transform: translateY(-50%) translateX(650px) translateZ(60px) scale(.88);
+                -ms-transform: translateY(-50%) translateX(650px) translateZ(60px) scale(.88);
+                transform: translateY(-50%) translateX(650px) translateZ(60px) scale(.88);
+
+                transform-style: preserve-3d;
+                z-index: 2;
+              }
+              .square-flip:hover .square-container2 {
+
+                -webkit-transform: translateY(-50%) translateX(0px) translateZ(0px) scale(1);
+                -ms-transform: translateY(-50%) translateX(0px) translateZ(0px) scale(1);
+                transform: translateY(-50%) translateX(0px) translateZ(0px) scale(1);
+                transform-style: preserve-3d;
+              }
+
+              /*Style text*/
+              .square-flip h2 {
+                color: white;
+                font-family: "Open Sans";
+                font-weight: 700;
+                font-size: 22px;
+              }
+              .square-flip h3 {
+                color: white;
+                font-family: "Open Sans";
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 26px;
+              }
+              /*Elements*/
+              .flip-overlay {
+                display: block;
+                background: rgba(0,0,0,0.5);
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+              }
+              .align-center {
+                margin: 0 auto;
+              }
+              .kallyas-button {
+                display: block;
+                width: 160px;
+                padding: 18px 30px;
+                font-family: "Open Sans";
+                font-weight: 600;
+                color: #fff;
+                background: #FF2024;
+                margin: 0 auto;
+                border-radius: 2px;
+                text-decoration: none;
+
+                /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffa067+0,ff2959+49,ff2024+100 */
+                background: #ffa067;
+                /* Old browsers */
+                background: -moz-linear-gradient(-45deg, #ffa067 0%, #ff2959 49%, #ff2024 100%);
+                /* FF3.6-15 */
+                background: -webkit-linear-gradient(-45deg, #ffa067 0%,#ff2959 49%,#ff2024 100%);
+                /* Chrome10-25,Safari5.1-6 */
+                background: linear-gradient(135deg, #ffa067 0%,#ff2959 49%,#ff2024 100%);
+                /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr= '#ffa067', endColorstr='#ff2024',GradientType=1 );
+                /* IE6-9 fallback on horizontal gradient */
+              }
+
+              /*ADD SHADOWS OPTIONAL*/
+              .square-flip .square .boxshadow,
+              .square-flip .square .textshadow,
+              .square-flip .square2 .boxshadow,
+              .square-flip .square2 .textshadow {
+                -ms-transition: 0.60s;
+                transition: 0.60s;
+                -webkit-transition: 0.60s;
+              }
+
+              .square-flip .square .boxshadow {
+                -webkit-box-shadow: 24px 42px 58px -8px rgba(0,0,0,0.3);
+                -moz-box-shadow: 24px 42px 58px -8px rgba(0,0,0,0.3);
+                box-shadow: 24px 42px 58px -8px rgba(0,0,0,0.3);
+              }
+              .square-flip .square .textshadow {
+                -webkit-text-shadow: 24px 42px 58px -8px rgba(0,0,0,0.3);
+                -moz-text-shadow: 24px 42px 58px -8px rgba(0,0,0,0.3);
+                text-shadow: 24px 42px 58px -8px rgba(0,0,0,0.3);
+              }
+              .square-flip:hover .square .boxshadow,
+              .square-flip:hover .square .textshadow {
+                -webkit-box-shadow: 240px 42px 58px -8px rgba(0,0,0,0.0);
+                -moz-box-shadow: 240px 42px 58px -8px rgba(0,0,0,0.0);
+                box-shadow: 240px 42px 58px -8px rgba(0,0,0,0.0);
+              }
+
+              .square-flip .square2 .boxshadow {
+                -webkit-box-shadow: 240px 42px 58px -8px rgba(0,0,0,0.0);
+                -moz-box-shadow: 240px 42px 58px -8px rgba(0,0,0,0.0);
+                box-shadow: 240px 42px 58px -8px rgba(0,0,0,0.0);
+              }
+              .square-flip .square2 .textshadow {
+                -webkit-text-shadow: 240px 42px 58px -8px rgba(0,0,0,0.0);
+                -moz-text-shadow: 240px 42px 58px -8px rgba(0,0,0,0.0);
+                text-shadow: 240px 42px 58px -8px rgba(0,0,0,0.0);
+              }
+              .square-flip:hover .square2 .boxshadow,
+              .square-flip:hover .square2 .textshadow {
+                -webkit-box-shadow: 24px 42px 58px -8px rgba(0,0,0,0.3);
+                -moz-box-shadow: 24px 42px 58px -8px rgba(0,0,0,0.3);
+                box-shadow: 24px 42px 58px -8px rgba(0,0,0,0.3);
+              }
+
+              /*You can delete this style*/
+              .centerflipcards {
+                display: block;
+                width: 780px;
+                height: 440px;
+                text-align: center;
+                margin: 25px auto 0;
+              }
+              .clearfix {
+                clear: both;
+              }
+              .centerflipcards p {
+                font-family: "Open Sans";
+                font-size: 13px;
+                margin-top: 10px;
+                font-weight: 700;
+              }
+
+            </style>
+
+            <div class="flip_squares">
+
+              <div class="square-flip">
+                <div class='square' data-image="https://images.unsplash.com/photo-1477313372947-d68a7d410e9f?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb">
+                  <div class="square-container">
+                    <div class="align-center"><img src="http://titanicthemes.com/files/flipbox/kallyas2.png" class="boxshadow" alt=""></div>
+                    <h2 class="textshadow">Kallyas Wp Theme</h2>
+                    <h3 class="textshadow">The #1 Selling Most Enjoyable and Creative Multipurpose WordPress theme.</h3>
+                  </div>
+                  <div class="flip-overlay"></div>
+                </div>
+                <div class='square2' data-image="https://images.unsplash.com/photo-1477313372947-d68a7d410e9f?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb">
+                  <div class="square-container2">
+                    <div class="align-center"></div>
+                    <h2>#1 Front-end Visual Website Builder in 2016</h2>
+                  </div>
+                  <div class="flip-overlay"></div>
+                </div>
+              </div>
+
+              <div class="square-flip">
+                <div class='square' data-image="https://instagram.fotp3-2.fna.fbcdn.net/t51.2885-15/e35/14712096_386502691740262_2357154798815412224_n.jpg?ig_cache_key=MTM2NzU2MzUwNjQ3OTUzOTgxNQ%3D%3D.2">
+                  <div class="square-container">
+                    <div class="align-center"><img src="http://titanicthemes.com/files/flipbox/kallyas2.png" class="boxshadow" alt=""></div>
+                    <h2 class="textshadow">Kallyas WordPress Theme</h2>
+                    <h3 class="textshadow">The #1 Selling Most Enjoyable and Creative Multipurpose WordPress theme.</h3>
+                  </div>
+                  <div class="flip-overlay"></div>
+                </div>
+                <div class='square2' data-image="http://titanicthemes.com/files/flipbox/kallyas-wedding.jpg">
+                  <div class="square-container2">
+                    <div class="align-center"></div>
+                    <h2>The only theme you'll ever need. No codding skills needed.</h2>
+                  </div>
+                  <div class="flip-overlay"></div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="flip_squares">
+
+              <div class="square-flip">
+                <div class='square' data-image="https://images.unsplash.com/photo-1477313372947-d68a7d410e9f?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb">
+                  <div class="square-container">
+                    <div class="align-center"><img src="http://titanicthemes.com/files/flipbox/kallyas2.png" class="boxshadow" alt=""></div>
+                    <h2 class="textshadow">Kallyas Wp Theme</h2>
+                    <h3 class="textshadow">The #1 Selling Most Enjoyable and Creative Multipurpose WordPress theme.</h3>
+                  </div>
+                  <div class="flip-overlay"></div>
+                </div>
+                <div class='square2' data-image="https://images.unsplash.com/photo-1477313372947-d68a7d410e9f?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb">
+                  <div class="square-container2">
+                    <div class="align-center"></div>
+                    <h2>#1 Front-end Visual Website Builder in 2016</h2>
+                  </div>
+                  <div class="flip-overlay"></div>
+                </div>
+              </div>
+
+              <div class="square-flip">
+                <div class='square' data-image="https://instagram.fotp3-2.fna.fbcdn.net/t51.2885-15/e35/14712096_386502691740262_2357154798815412224_n.jpg?ig_cache_key=MTM2NzU2MzUwNjQ3OTUzOTgxNQ%3D%3D.2">
+                  <div class="square-container">
+                    <div class="align-center"><img src="http://titanicthemes.com/files/flipbox/kallyas2.png" class="boxshadow" alt=""></div>
+                    <h2 class="textshadow">Kallyas WordPress Theme</h2>
+                    <h3 class="textshadow">The #1 Selling Most Enjoyable and Creative Multipurpose WordPress theme.</h3>
+                  </div>
+                  <div class="flip-overlay"></div>
+                </div>
+                <div class='square2' data-image="http://titanicthemes.com/files/flipbox/kallyas-wedding.jpg">
+                  <div class="square-container2">
+                    <div class="align-center"></div>
+                    <h2>The only theme you'll ever need. No codding skills needed.</h2>
+                  </div>
+                  <div class="flip-overlay"></div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+            <br/>
+            <br/>
+            <br/>
+
+            <script type="text/javascript">
+
+              jQuery(document).ready(function ($) {
+
+                //Count nr. of square classes
+                var countSquare = $('.square').length;
+
+                //For each Square found add BG image
+                for (i = 0; i < countSquare; i++) {
+                  var firstImage = $('.square').eq([i]);
+                  var secondImage = $('.square2').eq([i]);
+
+                  var getImage = firstImage.attr('data-image');
+                  var getImage2 = secondImage.attr('data-image');
+
+                  firstImage.css('background-image', 'url(' + getImage + ')');
+                  secondImage.css('background-image', 'url(' + getImage2 + ')');
+                }
+
+              });
+            </script>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+
+    <script type="text/javascript">
+
+      var landing = {
+        // Elements
+        el: {
+          // Mobile menu trigger
+          navMenu: $(".nav__menu"),
+          navMenuTrigger: $("#js-nav-trigger")
+        },
+        // Main init
+        init: function () {
+          landing.bindUIActions();
+        },
+        // Binding UI Actions
+        bindUIActions: function () {
+          landing.el.navMenuTrigger.on("click", landing.toggleNavMenu);
+        },
+        // Toggling navigation menu for mobile
+        toggleNavMenu: function () {
+          var navMenu = landing.el.navMenu;
+          navMenu.slideToggle();
+        }
+
+      }
+
+      landing.init();
+    </script>
+
+  </body>
+</html>

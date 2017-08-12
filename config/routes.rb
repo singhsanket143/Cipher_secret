@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'landing/index'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :questions
@@ -12,7 +14,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root to: "home#index"
+  root to: "landing#index"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
