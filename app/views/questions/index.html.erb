@@ -252,7 +252,7 @@
 </head>
 <body>
 
- <%= link_to 'New Question', new_question_path %>
+ <%= link_to "logOut", destroy_user_session_path ,method: :delete%>
  <div class="cards">
    <% @questions.each do |question| %>
    <div class="card paper-flatten">
