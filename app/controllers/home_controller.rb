@@ -4,6 +4,8 @@ class HomeController < ApplicationController
   include HTTParty
   def index
   end
+  def dashboard
+  end
   def solve
   		@langs = HTTParty.get('http://api.hackerrank.com/checker/languages.json')
   		@names = @langs["languages"]["names"]

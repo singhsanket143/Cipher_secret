@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html >
   <head>
@@ -304,15 +302,16 @@
                   <a class="menu__link">Features</a>
                 </li>
                 <li class="menu__item">
-                  <a class="menu__link">About</a>
+                  <%=link_to "Dashboard", dashboard_path,:class=>"menu__link"%>
                 </li>
-                <li class="menu__item">
-                  <%= link_to "Questions", questions_path,:class=>"menu__link"%>
-                </li>
+              
                 <li class="menu__item">
                   <%if user_signed_in?%>
-                <a><strong>  <%= link_to "logOut", destroy_user_session_path ,method: :delete,:class=>"menu__link"%></strong></a>
-                <%end%>
+                  <a>
+                    <strong>
+                      <%= link_to "logOut", destroy_user_session_path ,method: :delete,:class=>"menu__link"%></strong>
+                  </a>
+                  <%end%>
                   <!-- <a class="menu__link">Sign in</a> -->
                 </li>
               </ul>
@@ -547,7 +546,7 @@
                 /* Chrome10-25,Safari5.1-6 */
                 background: linear-gradient(135deg, #ffa067 0%,#ff2959 49%,#ff2024 100%);
                 /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr= '#ffa067', endColorstr='#ff2024',GradientType=1 );
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=  '#ffa067', endColorstr='#ff2024',GradientType=1 );
                 /* IE6-9 fallback on horizontal gradient */
               }
 
@@ -615,9 +614,9 @@
 
             </style>
 
-            <div class="flip_squares">
-
+            <div class="flip_squares ">
               <div class="square-flip">
+
                 <div class='square' data-image="https://images.unsplash.com/photo-1477313372947-d68a7d410e9f?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb">
                   <div class="square-container">
                     <div class="align-center"><img src="http://titanicthemes.com/files/flipbox/kallyas2.png" class="boxshadow" alt=""></div>
@@ -633,9 +632,10 @@
                   </div>
                   <div class="flip-overlay"></div>
                 </div>
+
               </div>
 
-              <div class="square-flip">
+              <div class=" square-flip">
                 <div class='square' data-image="https://instagram.fotp3-2.fna.fbcdn.net/t51.2885-15/e35/14712096_386502691740262_2357154798815412224_n.jpg?ig_cache_key=MTM2NzU2MzUwNjQ3OTUzOTgxNQ%3D%3D.2">
                   <div class="square-container">
                     <div class="align-center"><img src="http://titanicthemes.com/files/flipbox/kallyas2.png" class="boxshadow" alt=""></div>
@@ -644,7 +644,7 @@
                   </div>
                   <div class="flip-overlay"></div>
                 </div>
-                <div class='square2' data-image="http://titanicthemes.com/files/flipbox/kallyas-wedding.jpg">
+                <div class='square2' data-image="http://cdn.wallpapersafari.com/79/73/TvuM20.jpg">
                   <div class="square-container2">
                     <div class="align-center"></div>
                     <h2>The only theme you'll ever need. No codding skills needed.</h2>
@@ -684,7 +684,7 @@
                   </div>
                   <div class="flip-overlay"></div>
                 </div>
-                <div class='square2' data-image="http://titanicthemes.com/files/flipbox/kallyas-wedding.jpg">
+                <div class='square2' data-image="https://www.walldevil.com/wallpapers/a75/9188-macbook-backlight-wallpaper-retina-earphones-apple-keyboards-wallpapers.jpg">
                   <div class="square-container2">
                     <div class="align-center"></div>
                     <h2>The only theme you'll ever need. No codding skills needed.</h2>
@@ -699,61 +699,61 @@
             <br/>
             <br/>
             <br/>
-
-            <script type="text/javascript">
-
-              jQuery(document).ready(function ($) {
-
-                //Count nr. of square classes
-                var countSquare = $('.square').length;
-
-                //For each Square found add BG image
-                for (i = 0; i < countSquare; i++) {
-                  var firstImage = $('.square').eq([i]);
-                  var secondImage = $('.square2').eq([i]);
-
-                  var getImage = firstImage.attr('data-image');
-                  var getImage2 = secondImage.attr('data-image');
-
-                  firstImage.css('background-image', 'url(' + getImage + ')');
-                  secondImage.css('background-image', 'url(' + getImage2 + ')');
-                }
-
-              });
-            </script>
           </div>
-        </section>
-      </main>
-    </div>
-    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+          <script type="text/javascript">
 
-    <script type="text/javascript">
+            jQuery(document).ready(function ($) {
 
-      var landing = {
-        // Elements
-        el: {
-          // Mobile menu trigger
-          navMenu: $(".nav__menu"),
-          navMenuTrigger: $("#js-nav-trigger")
-        },
-        // Main init
-        init: function () {
-          landing.bindUIActions();
-        },
-        // Binding UI Actions
-        bindUIActions: function () {
-          landing.el.navMenuTrigger.on("click", landing.toggleNavMenu);
-        },
-        // Toggling navigation menu for mobile
-        toggleNavMenu: function () {
-          var navMenu = landing.el.navMenu;
-          navMenu.slideToggle();
-        }
+              //Count nr. of square classes
+              var countSquare = $('.square').length;
 
+              //For each Square found add BG image
+              for (i = 0; i < countSquare; i++) {
+                var firstImage = $('.square').eq([i]);
+                var secondImage = $('.square2').eq([i]);
+
+                var getImage = firstImage.attr('data-image');
+                var getImage2 = secondImage.attr('data-image');
+
+                firstImage.css('background-image', 'url(' + getImage + ')');
+                secondImage.css('background-image', 'url(' + getImage2 + ')');
+              }
+
+            });
+          </script>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+
+  <script type="text/javascript">
+
+    var landing = {
+      // Elements
+      el: {
+        // Mobile menu trigger
+        navMenu: $(".nav__menu"),
+        navMenuTrigger: $("#js-nav-trigger")
+      },
+      // Main init
+      init: function () {
+        landing.bindUIActions();
+      },
+      // Binding UI Actions
+      bindUIActions: function () {
+        landing.el.navMenuTrigger.on("click", landing.toggleNavMenu);
+      },
+      // Toggling navigation menu for mobile
+      toggleNavMenu: function () {
+        var navMenu = landing.el.navMenu;
+        navMenu.slideToggle();
       }
 
-      landing.init();
-    </script>
+    }
 
-  </body>
+    landing.init();
+  </script>
+
+</body>
 </html>

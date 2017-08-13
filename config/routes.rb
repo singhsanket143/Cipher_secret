@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'landing/index'
-
+  get '/dashboard'=>'landing#dashboard'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :questions
@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/users'=>"home#index"
   post '/solve'=>'home#solve'
   post '/evaluate'=>'home#evaluate'
+  get '/questions'=>'questions#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
