@@ -4,12 +4,240 @@
     <meta charset="utf-8">
     <title></title>
     <meta charset="utf-8">
+    <!--for editor  -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.css'>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+    <!-- for modal -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      main,
+      main1 {
+        /*min-height: 100%;
+        height: 100%;*/
+        background-image: url("http://theartmad.com/wp-content/uploads/Dark-Grey-Texture-Wallpaper-5.jpg");
+        background-size: cover;
+        background-position: top center;
+        font-family: helvetica neue, helvetica, arial, sans-serif;
+        font-weight: 200;
+      }
+      main.modal-active,
+      main1.modal-active {
+        overflow: hidden;
+      }
+
+      #modal-container {
+        position: fixed;
+        display: table;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        transform: scale(0);
+        z-index: 1;
+      }
+      #modal-container.six {
+        transform: scale(1);
+      }
+      #modal-container.six .modal-background {
+        background: transparent;
+        animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+      #modal-container.six .modal-background .modal {
+        background-color: transparent;
+        animation: modalFadeIn 0.5s 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+      #modal-container.six .modal-background .modal h2,
+      #modal-container.six .modal-background .modal p {
+        opacity: 0;
+        position: relative;
+        animation: modalContentFadeIn 0.5s 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+      #modal-container.six .modal-background .modal .modal-svg rect {
+        animation: sketchIn 0.5s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+      #modal-container.six.out {
+        animation: quickScaleDown 0s 0.5s linear forwards;
+      }
+      #modal-container.six.out .modal-background {
+        animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+      #modal-container.six.out .modal-background .modal {
+        animation: modalFadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+      #modal-container.six.out .modal-background .modal h2,
+      #modal-container.six.out .modal-background .modal p {
+        animation: modalContentFadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+      #modal-container.six.out .modal-background .modal .modal-svg rect {
+        animation: sketchOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+
+      #modal-container .modal-background {
+        display: table-cell;
+        background: rgba(0, 0, 0, 0.8);
+        text-align: center;
+        vertical-align: middle;
+      }
+      #modal-container .modal-background .modal {
+        background: white;
+        padding: 50px;
+        display: inline-block;
+        border-radius: 3px;
+        font-weight: 300;
+        position: relative;
+      }
+      #modal-container .modal-background .modal h2 {
+        font-size: 25px;
+        line-height: 25px;
+        margin-bottom: 15px;
+      }
+      #modal-container .modal-background .modal p {
+        font-size: 18px;
+        line-height: 22px;
+      }
+      #modal-container .modal-background .modal .modal-svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        border-radius: 3px;
+      }
+      #modal-container .modal-background .modal .modal-svg rect {
+        stroke: #fff;
+        stroke-width: 2px;
+        stroke-dasharray: 778;
+        stroke-dashoffset: 778;
+      }
+
+      .content {
+      height: auto;
+        background: white;
+        position: relative;
+        z-index: 0;
+      }
+      .content h1 {
+        padding: 75px 0 30px;
+        text-align: center;
+        font-size: 30px;
+        line-height: 30px;
+      }
+      .content .buttons {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0;
+        text-align: center;
+      }
+      .content .buttons .button {
+        display: inline-block;
+        text-align: center;
+        padding: 10px 15px;
+        margin: 10px;
+        background: red;
+        font-size: 18px;
+        background-color: #efefef;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+      }
+      .content .buttons .button:hover {
+        color: white;
+        background: #009bd5;
+      }
+      @keyframes fadeIn {
+        0% {
+          background: transparent;
+        }
+        100% {
+          background: rgba(0, 0, 0, 0.7);
+        }
+      }
+      @keyframes fadeOut {
+        0% {
+          background: rgba(0, 0, 0, 0.7);
+        }
+        100% {
+          background: transparent;
+        }
+      }
+      @keyframes quickScaleDown {
+        0% {
+          transform: scale(1);
+        }
+        99.9% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(0);
+        }
+      }
+      @keyframes sketchIn {
+        0% {
+          stroke-dashoffset: 778;
+        }
+        100% {
+          stroke-dashoffset: 0;
+        }
+      }
+      @keyframes sketchOut {
+        0% {
+          stroke-dashoffset: 0;
+        }
+        100% {
+          stroke-dashoffset: 778;
+        }
+      }
+      @keyframes modalFadeIn {
+        0% {
+          background-color: transparent;
+        }
+        100% {
+          background-color: white;
+        }
+      }
+      @keyframes modalFadeOut {
+        0% {
+          background-color: white;
+        }
+        100% {
+          background-color: transparent;
+        }
+      }
+      @keyframes modalContentFadeIn {
+        0% {
+          opacity: 0;
+          top: -20px;
+        }
+        100% {
+          opacity: 1;
+          top: 0;
+        }
+      }
+      @keyframes modalContentFadeOut {
+        0% {
+          opacity: 1;
+          top: 0;
+        }
+        100% {
+          opacity: 0;
+          top: -20px;
+        }
+      }
+
+    </style>
     <style media="screen">
       #editor {
         margin: 0;
@@ -19,39 +247,9 @@
         font-size: 14px;
       }
 
-      /*Compile Button CSS*/
-
       .btn {
         margin: 4px;
         box-shadow: 1px 1px 5px #888888;
-      }
-
-      .btn-sky {
-        color: #fff;
-        background-color: #0bacd3;
-        border-bottom: 2px solid #098aa9;
-      }
-      .btn-sky.active:focus,
-      .btn-sky:focus,
-      .btn-sky:hover {
-        color: #fff;
-        background-color: #29b6d8;
-        border-bottom: 2px solid #2192ad;
-        outline: none;
-      }
-      .btn-sky.active,
-      .btn-sky:active {
-        color: #fff;
-        background-color: #0a97b9;
-        border-top: 2px solid #087994;
-        outline-offset: none;
-        margin-top: 2px;
-      }
-      .btn-sky.active:focus {
-        color: #fff;
-        background-color: #df6a78;
-        border-bottom: 2px solid #b25560;
-        outline: none;
       }
       .btn.active:focus,
       .btn:active:focus,
@@ -60,13 +258,19 @@
         outline-offset: 0;
       }
 
+      .container {
+        width: 100%;
+        height: 100%;
+      }
+
       /*Compile Button CSS End*/
 
       .col-md-12.col-sm-12.codeSide {
-        /*background: #272822;*/
-        height: 40em;
+        background: #272822;
+        height: 100%;
+        width: 100%;
         padding-left: 21px;
-        border-radius: 10px;
+        border-radius: 5px;
         padding-top: 7px;
       }
 
@@ -76,11 +280,8 @@
 
       .ace_scroller {
         margin-left: 5px;
-      }
+        height: 100%;
 
-      input#compile {
-        margin-top: 5px;
-        float: right;
       }
 
       /*Language Select CSS */
@@ -93,224 +294,367 @@
         display: none;
       }
       #format {
-
+        /*position: absolute;*/
         display: none;
+      }
+      #formclass {
+        height: 100%;
+      }
+      .compile-code {
+        height: 100%;
       }
 
     </style>
   </head>
   <body>
-    <!-- Editor -->
-    <%= form_tag '/evaluate',remote: true do %>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 col-sm-12 codeSide">
-          <div class="row">
-            <div class="col-md-12 col-sm-12">
-              <div class="compile-code">
-                <!-- Language Selection -->
-                <!--themes  -->
-                <select class="selectpicker" data-live-search="true" class="form-control" id="theme" onchange="changeMode1()">
-                  <option value="monokai" id="monokai" selected>monokai</option>
-                  <option value="eclipse" id="eclipse">eclipse</option>
-                  <option value="merbivore" id="merbivore">merbivore</option>
-                  <option value="chaos" id="chaos">chaos</option>
-                </select>
 
-                <!-- Editor -->
+    <div class="editcard">
 
-                <!-- <textarea name="source"></textarea> -->
+      <div class="editcard-desc">
+        <%= form_tag '/evaluate',:id => 'formclass',remote: true do %>
+        <div class="container">
 
-                <pre name="code" id="editor" style="border: none;"></pre>
+          <div class="col-md-12 col-sm-12 codeSide">
+
+            <div class="compile-code">
+              <!-- Language Selection -->
+              <!--themes  -->
+              <select class="selectpicker" data-live-search="true" class="form-control" id="theme" onchange="changeMode1()">
+                <option value="monokai" id="monokai" selected>monokai</option>
+                <option value="eclipse" id="eclipse">eclipse</option>
+                <option value="merbivore" id="merbivore">merbivore</option>
+                <option value="chaos" id="chaos">chaos</option>
+              </select>
+              <%= select_tag 'lang', options_for_select(@names.collect{ |key,value| [value, @codes[key]] }),onchange:'changeMode()', class:"selectpicker"%>
+
+              <!-- Editor -->
+              <pre name="code" id="editor" style="border: none;"></pre>
+            </div>
+
+          </div>
+          <!-- /.col-md-12 col-sm-12 codeSide -->
+
+          <!-- /.row -->
+        </div>
+
+        <%= text_area_tag 'source'%>
+        <!-- <br>  <br><br><br><br><br><br><br> -->
+        <%= hidden_field_tag 'testcases',(@ques.inputtestcases)%>
+        <!-- <div class="new" -->
+        <%= select_tag 'format', options_for_select(["JSON","XML"]) %>
+        <%= hidden_field_tag 'api_key','hackerrank|2357374-1588|c8cb820f84f230248f9117b777b64f017d2cad2f' %>
+
+        <!-- </div> -->
+
+
+      </div>
+      <div class="editcard-actions">
+        <!-- <button type='button' class='editcard-action-readMore'></button> -->
+
+        <!-- </div> -->
+      </div>
+
+      <script type="text/javascript">
+        $(document).ready(function () {
+          // initialize all Ace editors on the page.
+          $("#editor").each(function (index, item) {
+            initAceEditor(item);
+          });
+        });
+        var editor = ace.edit("editor");
+        function initAceEditor(container) {
+          $(".but").click(function () {
+            var textarea = $("#source").val();
+            $("#source").val(editor.getValue());
+          })
+        }
+      </script>
+      <style media="screen">
+        .cards-row {
+          margin: 2px;
+        }
+
+        .editcard {
+          padding-top: 10px;
+          display: inline-block;
+          width: 70%;
+          height: 550px;
+          min-width: 400px;
+          box-sizing: border-box;
+          box-shadow: 2px 2px 25px 0 rgba(0, 0, 0, 0.7);
+          border-radius: 3px;
+          margin: 2px;
+          margin-left: 40px;
+          animation: scl 0.5s ease-in-out;
+          transform-origin: left center;
+          background-color: #fff;
+        }
+
+        .editcard-desc {
+          /*padding: 1em 1em 1em 1em;*/
+          border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+          height: 92%;
+
+          overflow: hidden;
+          text-align: justify;
+        }
+
+        .editcard-action-readMore {
+          margin: 0.5em 2em 2em 1.5em;
+          height: 2.5em;
+          width: 8em;
+          background: #ff1d8e;
+          border: none;
+          font-weight: light;
+          color: #fff;
+          position: relative;
+          overflow: hidden;
+          outline: none;
+          border-radius: 2px;
+        }
+        .editcard-action-readMore:hover {
+          background: rgba(255, 29, 142, 0.8);
+          transition: all 0.1s ease-in;
+        }
+        .editcard:hover {
+          box-shadow: 7px 7px 15px 2px rgba(0, 0, 0, 0.5);
+          transition: box-shadow 0.3s ease-in;
+        }
+
+        .ripple {
+          border-radius: 50%;
+          background: #ff8ec7;
+          position: absolute;
+          transform: scale(0);
+          opacity: 1;
+          animation: ripple 0.4s linear;
+        }
+        @keyframes ripple {
+          to {
+            transform: scale(2.5);
+            opacity: 0;
+          }
+        }
+        @keyframes scl {
+          0% {
+            opacity: 0;
+            transform: scaleX(0.9) translateX(-50px);
+          }
+
+          75% {
+            opacity: 0.2;
+          }
+
+          100% {
+            transform: scaleX(1) translateX(0);
+            opacity: 1;
+          }
+        }
+
+      </style>
+
+      <script type="text/javascript">
+        var buttons = document.getElementsByTagName('button');
+
+        Array.prototype.forEach.call(buttons, function (b) {
+          b.addEventListener('click', createRipple);
+        });
+
+        function createRipple(e) {
+          // alert('x');
+          var circle = document.createElement('div');
+          this.appendChild(circle);
+
+          var d = Math.max(this.clientWidth, this.clientHeight);
+
+          circle.style.width = circle.style.height = d + 'px';
+
+          var rect = this.getBoundingClientRect();
+          circle.style.left = e.clientX - rect.left - d / 2 + 'px';
+          circle.style.top = e.clientY - rect.top - d / 2 + 'px';
+          circle.classList.add('ripple');
+
+          setTimeout(function () {
+            circle.remove();
+          }, 500);
+        }
+      </script>
+      <!-- Editor -->
+
+      <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+      <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.js'></script>
+      <script src='https://ajaxorg.github.io/ace-builds/src-min-noconflict/ace.js'></script>
+      <script type="text/javascript">
+        // Editor Settings (Provided by C9)
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.setShowPrintMargin(false);
+        editor.session.setMode("ace/mode/c_cpp");
+        editor.setValue("///////////////enter your code here////////////////");
+        editor.clearSelection();
+
+        // Function to change the mode of the editor as a different language is selected dynamically
+        function changeMode() {
+          var x = document.getElementById("lang");
+          var modeV = x.options[x.selectedIndex];
+          var modeValue = modeV.getAttribute('value')
+          if (modeValue == "1") {
+            editor.session.setMode("ace/mode/c_cpp");
+            editor.setValue("#include <stdio.h>\n\n\nint main() {\n    // Complete the code.\n    return 0;\n}\n");
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "c";
+          }
+          if (modeValue == "2") {
+            editor.session.setMode("ace/mode/c_cpp");
+            editor.setValue("#include <iostream>\nusing namespace std;\n\nint main() {\n    // Complete the code.\n    return 0;\n}\n");
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "cpp";
+          }
+          if (modeValue == "9") {
+            editor.session.setMode("ace/mode/c#");
+            editor.setValue("using System;\nusing System.Collections.Generic;\nusing System.IO;\n\nclass Solution {\n   static void Main(String[] args) {\n // Complete the code.\n\n}\n}\n");
+
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "c#";
+          }
+          if (modeValue == "12") {
+            editor.session.setMode("ace/mode/haskell");
+            editor.setValue("import Control.Applicative\nimport Control.Monad\nimport System.IO\n\nmain :: IO ()\nmain = do\n");
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "haskell";
+          }
+          if (modeValue == "3" || modeValue == "43") {
+            editor.session.setMode("ace/mode/java");
+            editor.setValue("import java.io.*;\n\nclass Main {\n\n    public static void main(String[] args) {\n        // Your code goes here\n   }\n}\n");
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "java";
+          }
+          if (modeValue == "20") {
+            editor.session.setMode("ace/mode/javascript");
+            editor.setValue('process.stdin.resume();\nprocess.stdin.setEncoding(\'ascii\');\n\nvar input_stdin = \"";\nvar input_stdin_array = "";\nvar input_stdin_array = "";\n\nprocess.stdin.on(\'data\', function (data) {\n    input_stdin += data;\n});\n\nprocess.stdin.on(\'en' +
+                'd\', function () {\n    input_stdin_array = input_stdin.split("");\n    main();    \n});\n\nfunction readLine() {\n    return input_stdin_array[input_currentline++];\n}\n\n/////////////// ignore above this line ////////////////////\n\nfunction main()' +
+                ' {\n}\n');
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "javascript";
+          }
+          if (modeValue == "25") {
+            editor.session.setMode("ace/mode/pascal");
+            editor.setValue("(* Enter your code here. Read input from STDIN. Print output to STDOUT *)");
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "pascal";
+          }
+          if (modeValue == "6") {
+            editor.session.setMode("ace/mode/perl");
+            editor.setValue("#!/usr/bin/perl\n\n$n = <STDIN>;\nchomp $n;\n# your code goes here\n");
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "perl";
+          }
+          if (modeValue == "7") {
+            editor.session.setMode("ace/mode/php");
+            editor.setValue('<?php\n\n$handle = fopen ("php://stdin","r");\nfscanf($handle,"%d",$n);\n\n\n# your code goes here\n');
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "php";
+          }
+          if (modeValue == "5") {
+            editor.session.setMode("ace/mode/python");
+            editor.setValue('#!/bin/python\nimport sys\n\n\n# your code goes here\n');
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "py";
+          }
+          if (modeValue == "30") {
+            editor.session.setMode("ace/mode/python");
+            editor.setValue('#!/bin/python3\nimport sys\n\n# your code goes here\n');
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "py";
+          }
+          if (modeValue == "8") {
+            editor.session.setMode("ace/mode/ruby");
+            editor.setValue("#!/bin/ruby\n\n# your code goes here\n");
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "ruby";
+          }
+        }
+        function changeMode1() {
+          var x = document.getElementById("theme");
+          var modeValue = x.options[x.selectedIndex].value;
+          if (modeValue == "monokai") {
+            editor.setTheme("ace/theme/monokai");
+
+          }
+
+          if (modeValue == "eclipse") {
+            editor.setTheme("ace/theme/eclipse");
+
+          }
+          if (modeValue == "merbivore") {
+            editor.setTheme("ace/theme/merbivore");
+
+          }
+        }
+
+        $(document).ready(function () {
+          $('.selectpicker').selectpicker();
+          // $('.selectpicker1').selectpicker1();
+          $('[data-toggle="tooltip"]').tooltip();
+        });
+      </script>
+      <style media="screen">
+
+        .ace {
+          position: absolute;
+          color: white;
+          background-color: black;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+        #editor {
+          height: 100%;
+        }
+        pre#editor.ace_editor.ace-monokai.ace_dark {
+          width: 100%;
+          height: 90%;
+        }
+      </style>
+      <main1 >
+        <main>
+          <div id="modal-container">
+            <div class="modal-background">
+              <div class="modal">
+                <h2>I'm a Modal</h2>
+                <p>Hear me roar.</p>
+                <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
+                  <rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
+                </svg>
               </div>
-              <!-- <input type="submit" id="compile" class="btn btn-sky text-uppercase btn-sm" value="Compile"> -->
 
             </div>
           </div>
-        </div>
-        <!-- /.col-md-12 col-sm-12 codeSide -->
-      </div>
-      <!-- /.row -->
-    </div>
+          <div class="content">
+            <div class="buttons">
+              <%= submit_tag 'Submit' ,:id=>"six",:class=>"but button"%>
+              <!-- <div id="six" class="button">Sketch</div> -->
+              <!-- <div id="seven" class="button">Bond</div> -->
+            </div>
+          </div>
+          <%end%>
+          <script type="text/javascript">
+            $('.button').click(function () {
+              var buttonId = $(this).attr('id');
+              $('#modal-container').removeAttr('class').addClass(buttonId);
+              $('body').addClass('modal-active');
+            })
 
-    <%= text_area_tag 'source'%>
-    <!-- <br>  <br><br><br><br><br><br><br> -->
-    <%= hidden_field_tag 'testcases',(@ques.inputtestcases)%>
+            $('#modal-container').click(function () {
+              $(this).addClass('out');
+              $('body').removeClass('modal-active');
+            });
+          </script>
 
-    <!-- <div class="new" -->
-    <%= select_tag 'lang', options_for_select(@names.collect{ |key,value| [value, @codes[key]] }),onchange:'changeMode()',:class=>"selectpicker",data: { live_search: 'true' } %>
+        </main>
+      </main1>
 
-    <%= select_tag 'format', options_for_select(["JSON","XML"]) %>
-    <%= hidden_field_tag 'api_key','hackerrank|2357374-1588|c8cb820f84f230248f9117b777b64f017d2cad2f' %>
-    <%= submit_tag 'Submit' ,:class=>"but"%>
-    <!-- </div> -->
-
-    <% end %>
-<div id="result">
-
-</div>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.js'></script>
-    <script src='https://ajaxorg.github.io/ace-builds/src-min-noconflict/ace.js'></script>
-    <script type="text/javascript">
-      // Editor Settings (Provided by C9)
-      var editor = ace.edit("editor");
-      editor.setTheme("ace/theme/monokai");
-      editor.setShowPrintMargin(false);
-      editor.session.setMode("ace/mode/c_cpp");
-      editor.setValue("///////////////enter your code here////////////////");
-      editor.clearSelection();
-
-      // Function to change the mode of the editor as a different language is selected dynamically
-      function changeMode() {
-        var x = document.getElementById("lang");
-        var modeV = x.options[x.selectedIndex];
-        var modeValue = modeV.getAttribute('value')
-        if (modeValue == "1") {
-          editor.session.setMode("ace/mode/c_cpp");
-          editor.setValue("#include <stdio.h>\n\n\nint main() {\n    // Complete the code.\n    return 0;\n}\n");
-          editor.clearSelection();
-          document.getElementById('langExt').innerHTML = "c";
-        }
-        if (modeValue == "2") {
-          editor.session.setMode("ace/mode/c_cpp");
-          editor.setValue("#include <iostream>\nusing namespace std;\n\nint main() {\n    // Complete the code.\n    return 0;\n}\n");
-          editor.clearSelection();
-          document.getElementById('langExt').innerHTML = "cpp";
-        }
-        if (modeValue == "9") {
-          editor.session.setMode("ace/mode/c#");
-          editor.setValue("using System;\nusing System.Collections.Generic;\nusing System.IO;\n\nclass Solution {\n   static void Main(String[] args) {\n // Complete the code.\n\n}\n}\n");
-
-          editor.clearSelection();
-          document.getElementById('langExt').innerHTML = "c#";
-        }
-        if (modeValue == "12") {
-          editor.session.setMode("ace/mode/haskell");
-          editor.setValue("import Control.Applicative\nimport Control.Monad\nimport System.IO\n\nmain :: IO ()\nmain = do\n");
-          editor.clearSelection();
-          document.getElementById('langExt').innerHTML = "haskell";
-        }
-        if (modeValue == "3" || modeValue == "43") {
-          editor.session.setMode("ace/mode/java");
-          editor.setValue("import java.io.*;\n\nclass Main {\n\n    public static void main(String[] args) {\n        // Your code goes here\n   }\n}\n");
-          editor.clearSelection();
-          document.getElementById('langExt').innerHTML = "java";
-        }
-        if (modeValue == "20") {
-          editor.session.setMode("ace/mode/javascript");
-          editor.setValue('process.stdin.resume();\nprocess.stdin.setEncoding(\'ascii\');\n\nvar input_stdin = \"";\nvar input_stdin_array = "";\nvar input_stdin_array = "";\n\nprocess.stdin.on(\'data\', function (data) {\n    input_stdin += data;\n});\n\nprocess.stdin.on(\'en' +
-              'd\', function () {\n    input_stdin_array = input_stdin.split("");\n    main();    \n});\n\nfunction readLine() {\n    return input_stdin_array[input_currentline++];\n}\n\n/////////////// ignore above this line ////////////////////\n\nfunction main()' +
-              ' {\n}\n');
-          editor.clearSelection();
-          document.getElementById('langExt').innerHTML = "javascript";
-        }
-        if (modeValue == "25") {
-          editor.session.setMode("ace/mode/pascal");
-          editor.setValue("(* Enter your code here. Read input from STDIN. Print output to STDOUT *)");
-          editor.clearSelection();
-          document.getElementById('langExt').innerHTML = "pascal";
-        }
-        if (modeValue == "6") {
-          editor.session.setMode("ace/mode/perl");
-          editor.setValue("#!/usr/bin/perl\n\n$n = <STDIN>;\nchomp $n;\n# your code goes here\n");
-          editor.clearSelection();
-          document.getElementById('langExt').innerHTML = "perl";
-        }
-        if (modeValue == "7") {
-          editor.session.setMode("ace/mode/php");
-          editor.setValue('<?php\n\n$handle = fopen ("php://stdin","r");\nfscanf($handle,"%d",$n);\n\n\n# your code goes here\n');
-          editor.clearSelection();
-          document.getElementById('langExt').innerHTML = "php";
-        }
-        if (modeValue == "5") {
-          editor.session.setMode("ace/mode/python");
-          editor.setValue('#!/bin/python\nimport sys\n\n\n# your code goes here\n');
-          editor.clearSelection();
-          document.getElementById('langExt').innerHTML = "py";
-        }
-        if (modeValue == "30") {
-          editor.session.setMode("ace/mode/python");
-          editor.setValue('#!/bin/python3\nimport sys\n\n# your code goes here\n');
-          editor.clearSelection();
-          document.getElementById('langExt').innerHTML = "py";
-        }
-        if (modeValue == "8") {
-          editor.session.setMode("ace/mode/ruby");
-          editor.setValue("#!/bin/ruby\n\n# your code goes here\n");
-          editor.clearSelection();
-          document.getElementById('langExt').innerHTML = "ruby";
-        }
-        else{
-          editor.session.setMode("ace/mode/ruby");
-          editor.setValue("");
-          editor.clearSelection();
-        }
-      }
-      function changeMode1() {
-        var x = document.getElementById("theme");
-        var modeValue = x.options[x.selectedIndex].value;
-        if (modeValue == "monokai") {
-          editor.setTheme("ace/theme/monokai");
-
-        }
-
-        if (modeValue == "eclipse") {
-          editor.setTheme("ace/theme/eclipse");
-
-        }
-        if (modeValue == "merbivore") {
-          editor.setTheme("ace/theme/merbivore");
-
-        }
-      }
-
-      $(document).ready(function () {
-        $('.selectpicker').selectpicker();
-        // $('.selectpicker1').selectpicker1();
-        $('[data-toggle="tooltip"]').tooltip();
-      });
-    </script>
-    <!-- <%= response %> -->
-    <!-- <div class="ace-editor">
-  <textarea></textarea>
-</div> -->
-    <style media="screen">
-
-      .ace {
-        position: absolute;
-        color: white;
-        /*float:right;*/
-        background-color: black;
-        height: 400px;
-        width: 500px;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-      }
-      /*.new{
-  float:right;
-}*/
-
-    </style>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        // initialize all Ace editors on the page.
-        $("#editor").each(function (index, item) {
-          initAceEditor(item);
-        });
-      });
-      var editor = ace.edit("editor");
-      function initAceEditor(container) {
-        $(".but").click(function () {
-          var textarea = $("#source").val();
-          $("#source").val(editor.getValue());
-        })
-        // container = $(container); var textarea = $(this).find("textarea[name="source"]"); var aceEditorDiv = $('<div>', {"class": "ace"}).insertBefore(textarea); var aceEditor = ace.edit(aceEditorDiv[0]); textarea.closest('form').submit(function () {
-        // textarea.val(aceEditor.getValue()); });
-      }
-    </script>
-  </body>
-</html>
+    </body>
+  </html>
