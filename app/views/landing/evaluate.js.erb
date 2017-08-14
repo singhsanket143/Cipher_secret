@@ -1,6 +1,7 @@
 // console.log("<%=@val["result"]["stdout"]%>");
 // $('#result').html("hy");
+noty({text: 'Code was Successfully evaluated', type: 'success', timeout: 3500, progressBar: true});
 console.log("");
 var x = document.getElementsByClassName("result");
-var b="<%=@val["result"]%>";
+
 x[0].innerHTML="<%= @val["result"]["stdout"]%>";

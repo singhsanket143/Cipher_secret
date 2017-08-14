@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
-
+    <script type="text/javascript">
+      noty({text: 'Welcome to the Cipher Secret', type: 'success', timeout: 3500, progressBar: true});
+    </script>
     <style type="text/css">
 
       @import "https://fonts.googleapis.com/css?family=Open+Sans:400,600|Roboto+Slab:300,400";
@@ -304,7 +306,7 @@
                 <li class="menu__item">
                   <%=link_to "Dashboard", dashboard_path,:class=>"menu__link"%>
                 </li>
-              
+
                 <li class="menu__item">
                   <%if user_signed_in?%>
                   <a>
