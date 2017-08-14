@@ -1,0 +1,151 @@
+.row {
+  margin-top: 2rem;
+}
+.button{
+  width: 100px;
+}
+.button.loading {
+  position: relative;
+  overflow: hidden;
+}
+.button.loading .text {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+  -webkit-transition: -webkit-transform .2s ease-in-out;
+  transition: -webkit-transform .2s ease-in-out;
+  transition: transform .2s ease-in-out;
+  transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out;
+}
+.button.loading .status {
+  display: inline-block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: calc(50% - 9px);
+  left: calc(50% - 9px);
+  text-align: left;
+  overflow: hidden;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
+}
+.button.loading .status:before, .button.loading .status:after {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  width: 4px;
+  height: 4px;
+  -webkit-transform-origin: center;
+          transform-origin: center;
+  -webkit-transition: -webkit-transform .15s ease-in-out;
+  transition: -webkit-transform .15s ease-in-out;
+  transition: transform .15s ease-in-out;
+  transition: transform .15s ease-in-out, -webkit-transform .15s ease-in-out;
+}
+.button.loading:before, .button.loading:after {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  width: 2em;
+  height: 2em;
+  border: 0.2em solid;
+  position: absolute;
+  top: calc(50% - 1em);
+  left: calc(50% - 1em);
+  border-radius: 50%;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
+}
+.button.loading:before {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.button.loading:after {
+  border-color: rgba(255, 255, 255, 0.3) transparent transparent transparent;
+}
+.button.running .text, .button.passed .text {
+  -webkit-transform: translateY(-200%);
+          transform: translateY(-200%);
+}
+.button.running:before, .button.running:after {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.button.running:after {
+  -webkit-animation: rotator linear .5s infinite;
+          animation: rotator linear .5s infinite;
+  -webkit-animation-delay: .2s;
+          animation-delay: .2s;
+}
+.button.loading-ajax.success .status:before, .button.loading-ajax.success .status:after {
+  background: #1C5632;
+}
+.button.loading-ajax.success .status:before {
+  -webkit-transform: translate(5px, 8px) scale(1, 0);
+          transform: translate(5px, 8px) scale(1, 0);
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+}
+.button.loading-ajax.success .status:after {
+  -webkit-transform: translate(0, 8px) scale(0, 1);
+          transform: translate(0, 8px) scale(0, 1);
+  -webkit-transform-origin: bottom right;
+          transform-origin: bottom right;
+}
+.button.loading-ajax.success.passed .status:before {
+  -webkit-transform: translate(5px, 8px) scale(1, 5);
+          transform: translate(5px, 8px) scale(1, 5);
+}
+.button.loading-ajax.success.passed .status:after {
+  -webkit-transform: translate(0, 8px) scale(2.5, 1);
+          transform: translate(0, 8px) scale(2.5, 1);
+}
+.button.loading-ajax.fail .status:before, .button.loading-ajax.fail .status:after {
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+  background: #8E1804;
+}
+.button.loading-ajax.fail .status:before {
+  -webkit-transform: translate(2px, 0) scale(1, 0);
+          transform: translate(2px, 0) scale(1, 0);
+}
+.button.loading-ajax.fail .status:after {
+  -webkit-transform: translate(-2px, 0) scale(0, 1);
+          transform: translate(-2px, 0) scale(0, 1);
+}
+.button.loading-ajax.fail.passed .status:before {
+  -webkit-transform: translate(2px, 0) scale(1, 5);
+          transform: translate(2px, 0) scale(1, 5);
+}
+.button.loading-ajax.fail.passed .status:after {
+  -webkit-transform: translate(-2px, 0) scale(5, 1);
+          transform: translate(-2px, 0) scale(5, 1);
+}
+
+@-webkit-keyframes rotator {
+  0% {
+    -webkit-transform: rotateZ(0deg) scale(1);
+            transform: rotateZ(0deg) scale(1);
+  }
+  100% {
+    -webkit-transform: rotateZ(-360deg) scale(1);
+            transform: rotateZ(-360deg) scale(1);
+  }
+}
+
+@keyframes rotator {
+  0% {
+    -webkit-transform: rotateZ(0deg) scale(1);
+            transform: rotateZ(0deg) scale(1);
+  }
+  100% {
+    -webkit-transform: rotateZ(-360deg) scale(1);
+            transform: rotateZ(-360deg) scale(1);
+  }
+}

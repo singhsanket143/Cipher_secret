@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :questions
   devise_for :users
   get 'home/index'
-  get '/ide'=>'home#ide'
+  get '/ide'=>'landing#ide'
   get '/users'=>"home#index"
   post '/solve'=>'home#solve'
   post '/evaluate'=>'home#evaluate'
