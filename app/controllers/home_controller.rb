@@ -24,9 +24,9 @@ class HomeController < ApplicationController
   		response = HTTParty.post("http://api.hackerrank.com/checker/submission.json",:body => permitted);
       @val=JSON.parse(response.body)
       # return redirect_to '/solve'
-
+      
       # render '/solve'
-      byebug
+      # byebug
 
   	end
 end

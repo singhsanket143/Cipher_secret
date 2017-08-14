@@ -1,0 +1,5 @@
+// console.log("<%=@val["result"]["stdout"]%>");
+// $('#result').html("hy");
+console.log("<%=@val["result"]%>");
+var x = document.getElementsByClassName("result");
+x[0].innerHTML="<%= @val["result"]["stdout"] %>";
