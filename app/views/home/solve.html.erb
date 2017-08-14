@@ -316,7 +316,7 @@
 font-family: 'Raleway', Arial, sans-serif;
 padding-top: 10px;
 display: inline-block;
-width: 65%;
+width: 95%;
 height: 550px;
 min-width: 300px;
 box-sizing: border-box;
@@ -518,7 +518,7 @@ opacity: 1;
     /*padding-top: 10px;*/
     display: inline-block;
     float: right;
-    width: 25%;
+    width: 75%;
     height: 550px;
     /*min-width: 400px;*/
     /*box-sizing: border-box;*/
@@ -544,47 +544,59 @@ opacity: 1;
   <body>
 
 
+<div class="container">
+  <div class="row">
+    <div class="col col-lg-8 col-sm-12">
+      <figure class="snip1268 hover">
+        <div class="image">
+          <!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample17.jpg" alt="sq-sample17"/> -->
+          <div id="title">
+            <h2><strong><%= @ques.title %></strong></h2>
+          </div>
+          <div id="content">
+            <h2><strong>DESCRIPTION</strong></h2>
+            <h1><%= @ques.content %></h1>
+          </div>
+          <div id="constraint">
+            <h2><strong>CONSTRAINT</strong></h2>
+            <h1><%= @ques.constraint %></h1>
+          </div>
 
-
-
-
-
-
-
-    <figure class="snip1268 hover">
-      <div class="image">
-        <!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample17.jpg" alt="sq-sample17"/> -->
-        <div id="title">
-          <h2><strong><%= @ques.title %></strong></h2>
+          <div class="icons">
+              <a href="#"><i class="fa fa-download" aria-hidden="true"></i> Download Question</a>
+            <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editorial Answer</a>
+            <a href="#"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Your Submissions</a>
+          </div>
+          <a href="#" class="add-to-cart"><i class="fa fa-users" aria-hidden="true"></i> Discussion Forum </a>
         </div>
-        <div id="content">
-          <h2><strong>DESCRIPTION</strong></h2>
-          <h1><%= @ques.content %></h1>
-        </div>
-        <div id="constraint">
-          <h2><strong>CONSTRAINT</strong></h2>
-          <h1><%= @ques.constraint %></h1>
-        </div>
-
-        <div class="icons">
-            <a href="#"><i class="fa fa-download" aria-hidden="true"></i> Download Question</a>
-          <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editorial Answer</a>
-          <a href="#"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Your Submissions</a>
-        </div>
-        <a href="#" class="add-to-cart"><i class="fa fa-users" aria-hidden="true"></i> Discussion Forum </a>
-      </div>
-      <figcaption>
-      <div class="smallcard" ,id="one">
-        <p>Lorem ipsum dolor sit amet, consectetur ador incididunt ut labor</p>
-      </div>
-      <div class="smallcard", id="two">
+        <figcaption>
+        <div class="smallcard" ,id="one">
           <p>Lorem ipsum dolor sit amet, consectetur ador incididunt ut labor</p>
+        </div>
+        <div class="smallcard", id="two">
+            <p>Lorem ipsum dolor sit amet, consectetur ador incididunt ut labor</p>
+        </div>
+        <div class="smallcard" , id="three">
+            <p>Lorem ipsum dolor sit amet, consectetur ador incididunt ut labor</p>
+        </div>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="col col-lg-4 col-sm-12">
+      <div class="readdiv">
+
       </div>
-      <div class="smallcard" , id="three">
-          <p>Lorem ipsum dolor sit amet, consectetur ador incididunt ut labor</p>
-      </div>
-      </figcaption>
-    </figure>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
 
 <script type="text/javascript">
 $(".hover").mouseleave(
@@ -596,9 +608,6 @@ $(".hover").mouseleave(
 
 
 
-<div class="readdiv">
-
-</div>
 
 
 
