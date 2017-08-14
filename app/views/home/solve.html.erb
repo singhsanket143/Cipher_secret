@@ -394,6 +394,10 @@ left: 20px;
 right: 20px;
 opacity: 0;
 }
+.icons a{
+  padding-top: 5px;
+  padding: 15px;
+}
 .snip1268 .icons {
   color:#ffffff;
 -webkit-transform: translateY(-100%);
@@ -407,6 +411,7 @@ justify-content: space-between;
   font-size: 20px;
   padding-left: 20px;
 width: 32.5%;
+
 background: rgba(237,37,83,1);
 }
 .snip1268 .icons a:hover ,.snip1268 .add-to-cart a:hover{
@@ -537,6 +542,13 @@ opacity: 1;
 }
 
 /* Demo purposes only */
+@media only screen and (max-width: 760px){
+  .icons{
+    display: flex;
+    flex-flow: col;
+    justify-content: space-between;
+  }
+}
 
 
     </style>
@@ -562,10 +574,24 @@ opacity: 1;
             <h1><%= @ques.constraint %></h1>
           </div>
 
-          <div class="icons">
-              <a href="#"><i class="fa fa-download" aria-hidden="true"></i> Download Question</a>
-            <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editorial Answer</a>
-            <a href="#"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Your Submissions</a>
+
+              <div class="icons">
+
+
+              <div class="customflex">
+                <a href="#"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
+              </div>
+              <div class="customflex">
+                <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="false"></i> Editorial SOl</a>
+              </div>
+              <div class="customflex">
+                <a href="#"><i class="fa fa-lightbulb-o" aria-hidden="true" style=""></i> Submissions</a>
+              </div>
+
+
+
+
+
           </div>
           <a href="#" class="add-to-cart"><i class="fa fa-users" aria-hidden="true"></i> Discussion Forum </a>
         </div>

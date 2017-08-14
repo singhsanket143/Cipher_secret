@@ -43,7 +43,8 @@
       }
 
       body {
-        background-image: url("https://images.unsplash.com/photo-1450387535869-eae5b226b40f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=29289ec343b1f2f25e120e293b051074");
+      background-image: linear-gradient(rgba(43, 45, 66, 0.75), rgba(43, 45, 66, 0.75)), url("https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?dpr=1&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=&bg=");
+      background-position-x: 80%;
         background-size: cover;
         color: #9CA5AC;
         font-family: 'Open Sans', sans-serif;
@@ -74,10 +75,10 @@
       }
 
       .primary-bg {
-        background-image: url("https://images.unsplash.com/photo-1450387535869-eae5b226b40f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=29289ec343b1f2f25e120e293b051074");
+        background-image: linear-gradient(rgba(43, 45, 66, 0.75), rgba(43, 45, 66, 0.75)), url("https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?dpr=1&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=&bg=");
         background-size: cover;
         background-position: bottom;
-        background-position-x: 30%;
+        background-position-x: 50%;
       }
 
       .secondary-bg {
@@ -105,14 +106,20 @@
         font-family: 'Roboto Slab', serif;
         font-size: 1.75rem;
         font-weight: 300;
+        color: White;
       }
-      .brand-text span {
-        font-weight: 400;
+      .brand-text p span {
+        font-weight: 1000;
+        color: White;
       }
       .brand-text:hover {
         color: #D1D6D4;
       }
-
+      .brand-text p{
+        color: white;
+        font-weight: 300;
+        font-size: 30px;
+      }
       .trigger {
         text-align: right;
       }
@@ -133,9 +140,21 @@
         transition: 250ms ease-in-out;
         display: block;
         padding: 0.5rem 0;
+        font-weight: bold;
+        text-decoration: none;
+        color: white;
+      }
+      .menu__link a{
+        color: white;
+        text-decoration: none;
+      }
+      .menu__item a:visited{
+        color: white;
+        text-decoration: none;
       }
       .menu__link:hover {
-        color: #D1D6D4;
+
+        text-decoration: underline;
       }
       @media (min-width: 48em) {
         .menu__item,
@@ -163,7 +182,7 @@
         background-color: #00a778;
         border: none;
         border-radius: 1rem;
-        color: #FEFEFE;
+        color: white;
         cursor: pointer;
         font-size: 0.9rem;
         padding: 0.5rem 1.75rem;
@@ -172,6 +191,7 @@
       .button:focus,
       .button:hover {
         outline: none;
+        color: white;
         background-color: #40bd9a;
       }
 
@@ -271,7 +291,9 @@
       .landing .boon .headline {
         margin-bottom: 2rem;
       }
-
+      .lead a:visited{
+        color: white;
+      }
     </style>
 
   </head>
@@ -288,8 +310,8 @@
           <div class="nav__header">
             <!-- Brand text-->
             <h1 class="brand-text">
-              <a>Cipher<span>Secret</span>
-              </a>
+              <p>Cipher<span>Secret</span>
+              </p>
             </h1>
             <!-- Navigation menu trigger-->
             <a class="trigger" id="js-nav-trigger">
