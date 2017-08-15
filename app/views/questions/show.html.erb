@@ -1,44 +1,1016 @@
-<p id="notice"><%= notice %></p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta charset="utf-8">
+    <!--for editor  -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-<p>
-  <strong>Title:</strong>
-  <%= @question.title %>
-</p>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.css'>
 
-<p>
-  <strong>Content:</strong>
-  <%= @question.content %>
-</p>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
-<p>
-  <strong>Constraint:</strong>
-  <%= @question.constraint %>
-</p>
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+    <!-- for modal -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<script src="https://use.fontawesome.com/aed64409c1.js"></script>;
+    <style>
+      * {
+        box-sizing: border-box;
+      }
 
-<p>
-  <strong>Inputtestcases:</strong>
-  <%= @question.inputtestcases %>
-</p>
+      main,
+      main1 {
+        /*min-height: 100%;
+        height: 100%;*/
+        background-image: url("http://theartmad.com/wp-content/uploads/Dark-Grey-Texture-Wallpaper-5.jpg");
+        background-size: cover;
+        background-position: top center;
+        font-family: helvetica neue, helvetica, arial, sans-serif;
+        font-weight: 200;
+      }
+      main.modal-active,
+      main1.modal-active {
+        overflow: hidden;
+      }
 
-<p>
-  <strong>Outputtestcases:</strong>
-  <%= @question.outputtestcases %>
-</p>
+      #modal-container {
+        position: fixed;
+        display: table;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        transform: scale(0);
+        z-index: 1;
+      }
+      #modal-container.six {
+        transform: scale(1);
+      }
+      #modal-container.six .modal-background {
+        background: transparent;
+        animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+      #modal-container.six .modal-background .modal {
+        background-color: transparent;
+        animation: modalFadeIn 0.5s 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+      #modal-container.six .modal-background .modal h2,
+      #modal-container.six .modal-background .modal p {
+        opacity: 0;
+        position: relative;
+        animation: modalContentFadeIn 0.5s 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+      #modal-container.six .modal-background .modal .modal-svg rect {
+        animation: sketchIn 0.5s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+      #modal-container.six.out {
+        animation: quickScaleDown 0s 0.5s linear forwards;
+      }
+      #modal-container.six.out .modal-background {
+        animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+      #modal-container.six.out .modal-background .modal {
+        animation: modalFadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+      #modal-container.six.out .modal-background .modal h2,
+      #modal-container.six.out .modal-background .modal p {
+        animation: modalContentFadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+      #modal-container.six.out .modal-background .modal .modal-svg rect {
+        animation: sketchOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
 
-<p>
-  <strong>Marks:</strong>
-  <%= @question.marks %>
-</p>
+      #modal-container .modal-background {
+        display: table-cell;
+        background: rgba(0, 0, 0, 0.8);
+        text-align: center;
+        vertical-align: middle;
+      }
+      #modal-container .modal-background .modal {
+        background: white;
+        padding: 50px;
+        display: inline-block;
+        border-radius: 3px;
+        font-weight: 300;
+        position: relative;
+      }
+      #modal-container .modal-background .modal h2 {
+        font-size: 25px;
+        line-height: 25px;
+        margin-bottom: 15px;
+      }
+      #modal-container .modal-background .modal p {
+        font-size: 18px;
+        line-height: 22px;
+      }
+      #modal-container .modal-background .modal .modal-svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        border-radius: 3px;
+      }
+      #modal-container .modal-background .modal .modal-svg rect {
+        stroke: #fff;
+        stroke-width: 2px;
+        stroke-dasharray: 778;
+        stroke-dashoffset: 778;
+      }
 
-<p>
-  <strong>Difficulty:</strong>
-  <%= @question.difficulty %>
-</p>
+      .content {
+      height: auto;
+        background: white;
+        position: relative;
+        z-index: 0;
+      }
+      .content h1 {
+        padding: 75px 0 30px;
+        text-align: center;
+        font-size: 30px;
+        line-height: 30px;
+      }
+      .content .buttons {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0;
+        text-align: center;
+      }
+      .content .buttons .button {
+        display: inline-block;
+        text-align: center;
+        padding: 10px 15px;
+        margin: 10px;
+        background: red;
+        font-size: 18px;
+        background-color: #efefef;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+      }
+      .content .buttons .button:hover {
+        color: white;
+        background: #009bd5;
+      }
+      @keyframes fadeIn {
+        0% {
+          background: transparent;
+        }
+        100% {
+          background: rgba(0, 0, 0, 0.7);
+        }
+      }
+      @keyframes fadeOut {
+        0% {
+          background: rgba(0, 0, 0, 0.7);
+        }
+        100% {
+          background: transparent;
+        }
+      }
+      @keyframes quickScaleDown {
+        0% {
+          transform: scale(1);
+        }
+        99.9% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(0);
+        }
+      }
+      @keyframes sketchIn {
+        0% {
+          stroke-dashoffset: 778;
+        }
+        100% {
+          stroke-dashoffset: 0;
+        }
+      }
+      @keyframes sketchOut {
+        0% {
+          stroke-dashoffset: 0;
+        }
+        100% {
+          stroke-dashoffset: 778;
+        }
+      }
+      @keyframes modalFadeIn {
+        0% {
+          background-color: transparent;
+        }
+        100% {
+          background-color: white;
+        }
+      }
+      @keyframes modalFadeOut {
+        0% {
+          background-color: white;
+        }
+        100% {
+          background-color: transparent;
+        }
+      }
+      @keyframes modalContentFadeIn {
+        0% {
+          opacity: 0;
+          top: -20px;
+        }
+        100% {
+          opacity: 1;
+          top: 0;
+        }
+      }
+      @keyframes modalContentFadeOut {
+        0% {
+          opacity: 1;
+          top: 0;
+        }
+        100% {
+          opacity: 0;
+          top: -20px;
+        }
+      }
 
-<p>
-  <strong>Tag:</strong>
-  <%= @question.tag %>
-</p>
+    </style>
+    <style media="screen">
+      #editor {
+        margin: 0;
+        width: 100%;
+        height: 32em;
+        margin-top: 5px;
+        font-size: 14px;
+      }
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+      .btn {
+        margin: 4px;
+        box-shadow: 1px 1px 5px #888888;
+      }
+      .btn.active:focus,
+      .btn:active:focus,
+      .btn:focus {
+        outline: none;
+        outline-offset: 0;
+      }
+
+      .container {
+        width: 100%;
+        height: 100%;
+      }
+
+      /*Compile Button CSS End*/
+
+      .col-md-12.col-sm-12.codeSide {
+        background: #272822;
+        height: 100%;
+        width: 100%;
+        padding-left: 21px;
+        border-radius: 5px;
+        padding-top: 7px;
+      }
+
+      .ace_gutter {
+        min-width: 50px;
+      }
+
+      .ace_scroller {
+        margin-left: 5px;
+        height: 100%;
+
+      }
+
+      /*Language Select CSS */
+      button.btn.dropdown-toggle.btn-default {
+        width: 42%;
+        margin: 4px 2px 6px 4px;
+      }
+      #source {
+        position: absolute;
+        display: none;
+      }
+      #format {
+        /*position: absolute;*/
+        display: none;
+      }
+      #formclass {
+        height: 100%;
+      }
+      .compile-code {
+        height: 100%;
+      }
+
+    </style>
+
+    <!--for question  -->
+    <style media="screen">
+    /* Icon set - http://ionicons.com */
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
+
+.snip1268 {
+font-family: 'Raleway', Arial, sans-serif;
+padding-top: 10px;
+display: inline-block;
+width: 95%;
+height: 550px;
+min-width: 300px;
+box-sizing: border-box;
+box-shadow: 2px 2px 25px 0 rgba(0, 0, 0, 0.7);
+border-radius: 3px;
+margin: 2px;
+margin-left: 40px;
+animation: scl 0.5s ease-in-out;
+transform-origin: left center;
+background-color: #fff;
+line-height: 1.6em;
+overflow: hidden;
+color: #333333;
+
+}
+.snip1268 * {
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+-webkit-transition: all 0.6s ease;
+transition: all 0.6s ease;
+}
+.snip1268:hover {
+  box-shadow: 7px 7px 15px 2px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.4s ease-in;
+}
+
+.snip1268 .image {
+position: relative;
+width: 100%;
+height: 80%;
+background-color: #ffffff;
+
+}
+.snip1268 .image h2{
+  font-weight: 700;
+}
+
+#title{
+  color:#272822;
+  text-align: center;
+  font-size: 40px;
+  padding-top: 20px;
+}
+#content{
+  color:#272822;
+  text-align: left;
+  padding-left: 20px;
+    padding-top: 20px;
+  font-size: 20px;
+  margin: 3px;
+  margin-top: 5px;
+}
+#constraint{
+  color:#272822;
+  margin-top: 5px;
+  text-align: left;
+  padding-left: 20px;
+    padding-top: 20px;
+  font-size: 20px;
+  margin: 3px;
+  margin-top: 5px;
+}
+.snip1268 img {
+  /*width: 100%;*/
+max-width: 100%;
+vertical-align: top;
+-webkit-transition: opacity 0.35s;
+transition: opacity 0.35s;
+}
+.snip1268 .icons,
+.snip1268 .add-to-cart {
+  color:#ffffff;
+position: absolute;
+left: 20px;
+right: 20px;
+opacity: 0;
+}
+.icons a{
+  padding-top: 5px;
+  padding: 15px;
+}
+.snip1268 .icons {
+  color:#ffffff;
+-webkit-transform: translateY(-100%);
+transform: translateY(-100%);
+top: 20px;
+display: flex;
+justify-content: space-between;
+}
+.snip1268 .icons a {
+  color:#ffffff;
+  font-size: 20px;
+  padding-left: 20px;
+width: 32.5%;
+
+background: rgba(237,37,83,1);
+}
+.snip1268 .icons a:hover ,.snip1268 .add-to-cart a:hover{
+  color: #ffffff;
+  font-size: 20px;
+padding-left: 20px;
+background: #000000;
+}
+.snip1268 .icons a:hover i , .snip1268 .add-to-cart a:hover i{
+color: #ffffff;
+opacity: 1;
+}
+.snip1268 .icons i , .snip1268 .add-to-cart i{
+line-height: 46px;
+font-size: 40px;
+color: #ffffff;
+text-align: center;
+opacity: 0.7;
+margin: 0;
+}
+
+.snip1268 .add-to-cart {
+  padding-left: 20px;
+position: absolute;
+bottom: 20px;
+-webkit-transform: translateY(100%);
+transform: translateY(100%);
+font-size: 0.8em;
+color: #ffffff;
+line-height: 46px;
+letter-spacing: 1.5px;
+background-color: rgba(237,37,83,1);
+font-weight: 700;
+text-decoration: none;
+text-transform: uppercase;
+}
+.snip1268 .add-to-cart:hover {
+background: #000000;
+color: #ffffff;
+}
+.snip1268 figcaption {
+padding: 20px 20px 20px 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.snip1268 h3,
+.snip1268 p {
+margin: 0;
+text-align: left;
+}
+.snip1268 h3 {
+margin-bottom: 10px;
+font-weight: 700;
+}
+.snip1268 p {
+margin-bottom: 15px;
+font-size: 0.85em;
+font-weight: 500;
+}
+.snip1268 .price {
+font-size: 1.3em;
+opacity: 0.5;
+font-weight: 700;
+text-align: right;
+}
+.snip1268:hover img,
+.snip1268.hover img {
+opacity: 0.8;
+}
+.snip1268:hover .icons,
+.snip1268.hover .icons,
+.snip1268:hover .add-to-cart,
+.snip1268.hover .add-to-cart {
+-webkit-transform: translateY(0);
+transform: translateY(0);
+opacity: 1;
+}
+.smallcard{
+  width:25%;
+  display: flex;
+  justify-content: space-around;
+  font-family: 'Raleway', Arial, sans-serif;
+  padding: 2px;
+  padding-left: 5px;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.7);
+  border-radius: 3px;
+  margin: 2px;
+  margin-left: 5px;
+  animation: scl 0.5s ease-in-out;
+  transform-origin: left center;
+  background-color: #ffffff;
+  overflow: hidden;
+  color: #333333;
+  align-items: center;
+  align-content: space-between;
+  align-self: center;
+}
+
+.smallcard:hover {
+  box-shadow: 7px 7px 15px 2px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.4s ease-in;
+    background-color: #08A6E3;
+}
+
+.readdiv{
+
+    /*padding-top: 10px;*/
+    display: inline-block;
+    float: right;
+    width: 75%;
+    height: 550px;
+    /*min-width: 400px;*/
+    /*box-sizing: border-box;*/
+    box-shadow: 2px 2px 25px 0 rgba(0, 0, 0, 0.7);
+    border-radius: 3px;
+    margin: 0px;
+    margin-right: 30px;
+    animation: scl 0.5s ease-in-out;
+    transform-origin: left center;
+    background-color: #fff;
+
+}
+.readdiv:hover {
+  box-shadow: 7px 7px 15px 2px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.4s ease-in;
+}
+
+/* Demo purposes only */
+@media only screen and (max-width: 760px){
+  .icons{
+    display: flex;
+    flex-flow: col;
+    justify-content: space-between;
+  }
+}
+
+
+    </style>
+  </head>
+  <body>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col col-lg-8 col-sm-12">
+      <figure class="snip1268 hover">
+        <div class="image">
+          <!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample17.jpg" alt="sq-sample17"/> -->
+          <div id="title">
+            <h2><strong><%= @question.title %></strong></h2>
+          </div>
+          <div id="content">
+            <h2><strong>DESCRIPTION</strong></h2>
+            <h1><%= @question.content %></h1>
+          </div>
+          <div id="constraint">
+            <h2><strong>CONSTRAINT</strong></h2>
+            <h1><%= @question.constraint %></h1>
+          </div>
+
+
+              <div class="icons">
+
+
+              <div class="customflex">
+                <a href="#"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
+              </div>
+              <div class="customflex">
+                <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="false"></i> Editorial SOl</a>
+              </div>
+              <div class="customflex">
+                <a href="#"><i class="fa fa-lightbulb-o" aria-hidden="true" style=""></i> Submissions</a>
+              </div>
+
+
+
+
+
+          </div>
+          <a href="#" class="add-to-cart"><i class="fa fa-users" aria-hidden="true"></i> Discussion Forum </a>
+        </div>
+        <figcaption>
+        <div class="smallcard" ,id="one">
+          <p>Lorem ipsum dolor sit amet, consectetur ador incididunt ut labor</p>
+        </div>
+        <div class="smallcard", id="two">
+            <p>Lorem ipsum dolor sit amet, consectetur ador incididunt ut labor</p>
+        </div>
+        <div class="smallcard" , id="three">
+            <p>Lorem ipsum dolor sit amet, consectetur ador incididunt ut labor</p>
+        </div>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="col col-lg-4 col-sm-12">
+      <div class="readdiv">
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(".hover").mouseleave(
+ function () {
+   $(this).removeClass("hover");
+ }
+);
+</script>
+
+
+
+
+
+
+
+
+    <div class="editcard">
+
+      <div class="editcard-desc">
+        <%= form_tag '/evaluate',:id => 'formclass',remote: true do %>
+        <div class="container">
+
+          <div class="col-md-12 col-sm-12 codeSide">
+
+            <div class="compile-code">
+              <!-- Language Selection -->
+              <!--themes  -->
+              <select class="selectpicker" data-live-search="true" class="form-control" id="theme" onchange="changeMode1()">
+                <option value="monokai" id="monokai" selected>monokai</option>
+                <option value="eclipse" id="eclipse">eclipse</option>
+                <option value="merbivore" id="merbivore">merbivore</option>
+                <option value="chaos" id="chaos">chaos</option>
+              </select>
+            <%= select_tag 'lang', options_for_select(@names.collect{ |key,value| [value, @codes[key]] }),onchange:'changeMode()',:class=>"selectpicker",data: { live_search: 'true' } %>
+              <!-- Editor -->
+              <pre name="code" id="editor" style="border: none;"></pre>
+            </div>
+
+          </div>
+          <!-- /.col-md-12 col-sm-12 codeSide -->
+
+          <!-- /.row -->
+        </div>
+
+        <%= text_area_tag 'source'%>
+        <!-- <br>  <br><br><br><br><br><br><br> -->
+        <%= hidden_field_tag 'testcases',(@question.inputtestcases)%>
+        <!-- <div class="new" -->
+        <%= select_tag 'format', options_for_select(["JSON","XML"]) %>
+        <%= hidden_field_tag 'api_key','hackerrank|2357374-1588|c8cb820f84f230248f9117b777b64f017d2cad2f' %>
+
+        <!-- </div> -->
+
+
+      </div>
+      <div class="editcard-actions">
+        <!-- <button type='button' class='editcard-action-readMore'></button> -->
+
+        <!-- </div> -->
+      </div>
+      <script type="text/javascript">
+        $(document).ready(function () {
+          // initialize all Ace editors on the page.
+          $("#editor").each(function (index, item) {
+            initAceEditor(item);
+          });
+        });
+        var editor = ace.edit("editor");
+        function initAceEditor(container) {
+          $(".but").click(function () {
+            $('.result').text("");
+        		var textarea = $("#source").val();
+        		$("#source").val(editor.getValue());
+        		var newText = $('#custominput').val();
+        		var arr = [];
+        		arr.push(String(newText));
+        		$('#custominput').val(JSON.stringify(arr));
+        		setTimeout(function () {
+        			$('#custominput').val("");
+        		}, 1);
+            // $('.result').text("<%=%>");
+        	})
+        	$(".button").click(function () {
+        		var textarea = $("#source").val();
+        		$("#source").val(editor.getValue());
+        	});
+        }
+      </script>
+      <style media="screen">
+        .cards-row {
+          margin: 2px;
+        }
+
+        .editcard {
+          padding-top: 10px;
+          display: inline-block;
+          width: 70%;
+          height: 550px;
+          min-width: 400px;
+          box-sizing: border-box;
+          box-shadow: 2px 2px 25px 2px rgba(0, 0, 0, 0.7);
+          border-radius: 3px;
+          margin: 2px;
+          margin-top: 20px;
+          margin-left: 40px;
+          animation: scl 0.5s ease-in-out;
+          transform-origin: left center;
+          background-color: #fff;
+        }
+
+        .editcard-desc {
+          /*padding: 1em 1em 1em 1em;*/
+          border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+          height: 92%;
+
+          overflow: hidden;
+          text-align: justify;
+        }
+
+        .editcard-action-readMore {
+          margin: 0.5em 2em 2em 1.5em;
+          height: 2.5em;
+          width: 8em;
+          background: #ff1d8e;
+          border: none;
+          font-weight: light;
+          color: #fff;
+          position: relative;
+          overflow: hidden;
+          outline: none;
+          border-radius: 2px;
+        }
+        .editcard-action-readMore:hover {
+          background: rgba(255, 29, 142, 0.8);
+          transition: all 0.1s ease-in;
+        }
+        .editcard:hover {
+          box-shadow: 7px 7px 15px 2px rgba(0, 0, 0, 0.5);
+          transition: box-shadow 0.3s ease-in;
+        }
+
+        .ripple {
+          border-radius: 50%;
+          background: #ff8ec7;
+          position: absolute;
+          transform: scale(0);
+          opacity: 1;
+          animation: ripple 0.4s linear;
+        }
+        @keyframes ripple {
+          to {
+            transform: scale(2.5);
+            opacity: 0;
+          }
+        }
+        @keyframes scl {
+          0% {
+            opacity: 0;
+            transform: scaleX(0.9) translateX(-50px);
+          }
+
+          75% {
+            opacity: 0.2;
+          }
+
+          100% {
+            transform: scaleX(1) translateX(0);
+            opacity: 1;
+          }
+        }
+
+      </style>
+
+      <script type="text/javascript">
+        var buttons = document.getElementsByTagName('button');
+
+        Array.prototype.forEach.call(buttons, function (b) {
+          b.addEventListener('click', createRipple);
+        });
+
+        function createRipple(e) {
+          // alert('x');
+          var circle = document.createElement('div');
+          this.appendChild(circle);
+
+          var d = Math.max(this.clientWidth, this.clientHeight);
+
+          circle.style.width = circle.style.height = d + 'px';
+
+          var rect = this.getBoundingClientRect();
+          circle.style.left = e.clientX - rect.left - d / 2 + 'px';
+          circle.style.top = e.clientY - rect.top - d / 2 + 'px';
+          circle.classList.add('ripple');
+
+          setTimeout(function () {
+            circle.remove();
+          }, 500);
+        }
+      </script>
+      <!-- Editor -->
+
+      <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+      <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.js'></script>
+      <script src='https://ajaxorg.github.io/ace-builds/src-min-noconflict/ace.js'></script>
+      <script type="text/javascript">
+        // Editor Settings (Provided by C9)
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.setShowPrintMargin(false);
+        editor.session.setMode("ace/mode/c_cpp");
+        editor.setValue("#include <stdio.h>\n\n\nint main() {\n    // Complete the code.\n    return 0;\n}\n");
+        editor.clearSelection();
+
+        // Function to change the mode of the editor as a different language is selected dynamically
+        function changeMode() {
+          var x = document.getElementById("lang");
+          var modeV = x.options[x.selectedIndex];
+          var modeValue = modeV.getAttribute('value')
+          if (modeValue == "1") {
+            editor.session.setMode("ace/mode/c_cpp");
+            editor.setValue("#include <stdio.h>\n\n\nint main() {\n    // Complete the code.\n    return 0;\n}\n");
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "c";
+          }
+          if (modeValue == "2") {
+            editor.session.setMode("ace/mode/c_cpp");
+            editor.setValue("#include <iostream>\nusing namespace std;\n\nint main() {\n    // Complete the code.\n    return 0;\n}\n");
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "cpp";
+          }
+          if (modeValue == "9") {
+            editor.session.setMode("ace/mode/c#");
+            editor.setValue("using System;\nusing System.Collections.Generic;\nusing System.IO;\n\nclass Solution {\n   static void Main(String[] args) {\n // Complete the code.\n\n}\n}\n");
+
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "c#";
+          }
+          if (modeValue == "12") {
+            editor.session.setMode("ace/mode/haskell");
+            editor.setValue("import Control.Applicative\nimport Control.Monad\nimport System.IO\n\nmain :: IO ()\nmain = do\n");
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "haskell";
+          }
+          if (modeValue == "3" || modeValue == "43") {
+            editor.session.setMode("ace/mode/java");
+            editor.setValue("import java.util.*;\n\nclass Main {\n\n    public static void main(String[] args) {\n        // Your code goes here\n   }\n}\n");
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "java";
+          }
+          if (modeValue == "20") {
+            editor.session.setMode("ace/mode/javascript");
+            editor.setValue('process.stdin.resume();\nprocess.stdin.setEncoding(\'ascii\');\n\nvar input_stdin = \"";\nvar input_stdin_array = "";\nvar input_stdin_array = "";\n\nprocess.stdin.on(\'data\', function (data) {\n    input_stdin += data;\n});\n\nprocess.stdin.on(\'en' +
+                'd\', function () {\n    input_stdin_array = input_stdin.split("");\n    main();    \n});\n\nfunction readLine() {\n    return input_stdin_array[input_currentline++];\n}\n\n/////////////// ignore above this line ////////////////////\n\nfunction main()' +
+                ' {\n}\n');
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "javascript";
+          }
+          if (modeValue == "25") {
+            editor.session.setMode("ace/mode/pascal");
+            editor.setValue("(* Enter your code here. Read input from STDIN. Print output to STDOUT *)");
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "pascal";
+          }
+          if (modeValue == "6") {
+            editor.session.setMode("ace/mode/perl");
+            editor.setValue("#!/usr/bin/perl\n\n$n = <STDIN>;\nchomp $n;\n# your code goes here\n");
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "perl";
+          }
+          if (modeValue == "7") {
+            editor.session.setMode("ace/mode/php");
+            editor.setValue('<?php\n\n$handle = fopen ("php://stdin","r");\nfscanf($handle,"%d",$n);\n\n\n# your code goes here\n');
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "php";
+          }
+          if (modeValue == "5") {
+            editor.session.setMode("ace/mode/python");
+            editor.setValue('#!/bin/python\nimport sys\n\n\n# your code goes here\n');
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "py";
+          }
+          if (modeValue == "30") {
+            editor.session.setMode("ace/mode/python");
+            editor.setValue('#!/bin/python3\nimport sys\n\n# your code goes here\n');
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "py";
+          }
+          if (modeValue == "8") {
+            editor.session.setMode("ace/mode/ruby");
+            editor.setValue("#!/bin/ruby\n\n# your code goes here\n");
+            editor.clearSelection();
+            document.getElementById('langExt').innerHTML = "ruby";
+          }
+        }
+        function changeMode1() {
+          var x = document.getElementById("theme");
+          var modeValue = x.options[x.selectedIndex].value;
+          if (modeValue == "monokai") {
+            editor.setTheme("ace/theme/monokai");
+
+          }
+
+          if (modeValue == "eclipse") {
+            editor.setTheme("ace/theme/eclipse");
+
+          }
+          if (modeValue == "merbivore") {
+            editor.setTheme("ace/theme/merbivore");
+
+          }
+        }
+
+        $(document).ready(function () {
+          $('.selectpicker').selectpicker();
+          // $('.selectpicker1').selectpicker1();
+          $('[data-toggle="tooltip"]').tooltip();
+        });
+      </script>
+      <style media="screen">
+
+        .ace {
+          position: absolute;
+          color: white;
+          background-color: black;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+        #editor {
+          height: 100%;
+        }
+        pre#editor.ace_editor.ace-monokai.ace_dark {
+          width: 100%;
+          height: 90%;
+        }
+      </style>
+      <main1 >
+        <main>
+          <div id="modal-container">
+            <div class="modal-background">
+              <div class="modal">
+                <div class="resultofcode">
+hy
+                </div>
+                <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
+                  <rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
+                </svg>
+              </div>
+
+            </div>
+          </div>
+          <div class="content">
+             <div class="buttons">
+               <button type="button" name="button" type="submit" class="but button" onclick='doDL(document.getElementById("source").value)'>Save</button>
+               <%= submit_tag 'Submit' ,:id=>"six",:class=>"but button"%>
+               <!-- <div id="six" class="button">Sketch</div> -->
+               <!-- <div id="seven" class="button">Bond</div> -->
+             </div>
+           </div>
+           <%end%>
+          <script type="text/javascript">
+            $('.button').click(function () {
+              var buttonId = $(this).attr('id');
+              $('#modal-container').removeAttr('class').addClass(buttonId);
+              $('body').addClass('modal-active');
+            })
+
+            $('#modal-container').click(function () {
+              $(this).addClass('out');
+              $('body').removeClass('modal-active');
+            });
+          </script>
+
+        </main>
+      </main1>
+      <script type='text/javascript'>
+      $(".button").click(function () {
+      	var textarea = $("#source").val();
+      	$("#source").val(editor.getValue());
+      });
+      function doDL(s) {
+      	function dataUrl(data) {
+      		return "data:x-application/text," + escape(data);
+      	}
+      	window.open(dataUrl(s));
+      }
+      </script>
+    </body>
+  </html>

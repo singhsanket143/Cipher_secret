@@ -4,19 +4,6 @@ class HomeController < ApplicationController
   include HTTParty
   def index
   end
-  def dashboard
-  end
-
-  def solve
-  		@langs = HTTParty.get('http://api.hackerrank.com/checker/languages.json')
-  		@names = @langs["languages"]["names"]
-  		@codes = @langs["languages"]["codes"]
-      # @ques=Question.find(params[:questions_id])
-      @ques=Question.where(id: params[:id]).first
-      # byebug
-      # @ques=Question.find(id)
-
-  	end
 
   	def evaluate
 
@@ -24,7 +11,7 @@ class HomeController < ApplicationController
   		response = HTTParty.post("http://api.hackerrank.com/checker/submission.json",:body => permitted);
       @val=JSON.parse(response.body)
       # return redirect_to '/solve'
-      
+
       # render '/solve'
       # byebug
 

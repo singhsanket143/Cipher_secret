@@ -22,7 +22,7 @@ class LandingController < ApplicationController
     # byebug
 
     # render '/solve'
-    # byebug
+    
 
   end
 end

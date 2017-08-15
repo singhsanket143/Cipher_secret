@@ -11,6 +11,22 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
+    @langs = HTTParty.get('http://api.hackerrank.com/checker/languages.json')
+    @names = @langs["languages"]["names"]
+    @codes = @langs["languages"]["codes"]
+    # @ques=Question.find(params[:questions_id])
+    # @question=Question.where(id: params[:id]).first
+  end
+
+  def evaluate
+    permitted = params.permit("source","lang","testcases","api_key","format")
+    response = HTTParty.post("http://api.hackerrank.com/checker/submission.json",:body => permitted);
+    @val=JSON.parse(response.body)
+    # return redirect_to '/solve'
+
+    # render '/solve'
+    byebug
+
   end
 
   # GET /questions/new

@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   get 'home/index'
   get '/ide'=>'landing#ide'
   get '/users'=>"home#index"
-  post '/solve'=>'home#solve'
-  post '/evaluate'=>'home#evaluate'
+  get '/solve'=>'questions#show'
+  post '/evaluate'=>'questions#evaluate'
   post '/ideevaluate'=>'landing#evaluate'
   get '/questions'=>'questions#index'
   # The priority is based upon order of creation: first created -> highest priority.

@@ -276,7 +276,7 @@
      </div>
      <div class="card-flap flap2">
       <div class="card-actions">
-      <%= link_to 'Solve',url_for(controller: :home,action: :solve, id: question.id), method: :post,:class=> "btn" %>
+      <%= link_to 'Solve',url_for(controller: :questions,action: :show, id: question.id), method: :get,:class=> "btn" %>
      </div>
    </div>
  </div>
