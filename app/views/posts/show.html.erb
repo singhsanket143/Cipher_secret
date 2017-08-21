@@ -1,0 +1,318 @@
+<p id="notice"><%= notice %></p>
+
+<style media="screen">
+*{font-family:calibri;}
+
+.avatar{
+  border-radius:100px;
+  width:80px;
+  height:80px;
+  float:left;
+}
+.avatar:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.message{
+  position:relative;
+  clear:both;
+  width:590px;
+}
+.message .avatar{
+  margin-top:5px;
+}
+.message p{
+  float:left;
+  font-family:calibri;
+  color:#333;
+  width:450px;
+  margin:0;
+  margin-left:20px;
+  margin-top:5px;
+  padding:10px;
+  background-color:#fafafa;
+  border:1px solid #eee;
+  border-radius:5px;
+  margin-bottom:10px;
+  word-spacing:3px;
+  line-height:22px;
+}
+.message p:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.message p em.info{
+  display:block;
+  text-align:right;
+  margin-top:10px;
+  font-size:12px;
+  font-weight:bold;
+  color:#666px;
+}
+.message p strong{
+  display:block;
+  color:#428bca;
+  border-bottom:1px solid #ddd;
+  margin-bottom:10px;
+}
+.message p strong em{
+  font-weigh:normal;
+  color:#333;
+  font-size:10pt;
+}
+.message .triangle{
+  display:block;
+  position:absolute;
+  left:85px;
+  top:25px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 15px 10px 0;
+  border-color: transparent #eeeeee transparent transparent;
+}
+
+.inverse .avatar{float:right;}
+.inverse p{float:none;background-color:#eee;}
+.inverse .triangle{
+  display:block;
+  position:absolute;
+  left:490px;
+width: 0;
+height: 0;
+border-style: solid;
+border-width: 10px 0 10px 15px;
+border-color: transparent transparent transparent #eeeeee;
+}
+
+#global{
+  margin-top: 30px;
+  width:1140px;
+}
+.messages{float:left;}
+.postform{
+  display:block;
+  width:518px;
+  float:right;
+  padding-left:18px;
+  border-left:2px solid #eee;
+}
+
+.postform form label{
+  display:block;
+}
+.postform form label textarea{
+  width:480px;
+  height:300px;
+  border-radius:10px;
+  background-color:#efefef;
+  border:0;
+  padding:10px;
+  font-size:12pt;
+  color:#333;
+  font-style:italic;
+}
+.postform form label textarea:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.postform form div.headform{
+  padding-bottom:10px;
+  color:#666;
+}
+.postform form div.headform strong{
+  display:block;
+  font-size:14pt;
+  color:#428bca;
+  padding-bottom:10px;
+}
+.postform form div.headform strong span{
+  color:#333;
+}
+.postform form .submit{
+  display:block;
+  width:200px;
+  height:30px;
+  background-color:#428bca;
+  color:#fff;
+  border:0;
+  border-radius:5px;
+  margin-top:5px;
+  float:right;
+  cursor:pointer;
+  margin-right:18px;
+}
+.postform form .submit:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.postform a{
+  color:#428bca;
+}
+
+@media screen and (max-width: 1140px) {
+  #global{width:100%;}
+  .message{float:none;margin:auto;}
+  .messages{float:none;margin:auto;}
+  .postform{float:none;height:275px;margin:auto;border:0;}
+  .postform form label textarea {height:150px;}
+}
+@media screen and (max-width: 620px) {
+
+  body{margin-right:60px;}
+  .message .avatar,.inverse .avatar,.message .triangle,.inverse .triangle{display:none;}
+  .postform,.postform form label textarea,.message,.message p{width:100%;}
+  .postform{height:initial}
+  .postform form .submit{margin:auto;margin:10px 0;}
+}
+
+</style>
+
+
+<style>
+/* Libs */
+/* General */
+
+
+a {
+  -moz-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  color: #e74c3c;
+}
+a:hover {
+  color: #4BD3F4;
+}
+
+/* Card */
+.card {
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #ecf0f1));
+  background-image: -moz-linear-gradient(top, #ffffff 0%, #ecf0f1 100%);
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #ecf0f1 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #ecf0f1 100%);
+  -moz-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  display: block;
+  position: relative;
+  padding: 20px;
+  margin: 10px;
+}
+.card:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.card .card-image {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+}
+.card .card-image .btn {
+
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  background-position: -45px 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 0;
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  position: absolute;
+  padding: 0;
+}
+.card .card-image .btn img{
+  margin-left: -200px;
+  margin-top: -200px;
+}
+.card .card-info {
+  margin-left: 120px;
+}
+
+.card .card-info .name p{
+  font-size: 28px;
+    font-weight: 100;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+
+
+@media (min-width: 639px) {
+  .card .card-info .social-network {
+    float: right;
+    margin: 5px 0 0;
+  }
+}
+.card .card-info hr {
+  margin: 0 0 15px;
+}
+
+
+  </style>
+
+
+
+
+<div class="container">
+<div class="row">
+  <div class="col-xs-12">
+
+    <div class="card">
+
+      <div class="card-image">
+        <a href="#" type="button" class="btn">
+          <img src="https://s-media-cache-ak0.pinimg.com/originals/0e/bd/da/0ebdda58f6c9a629a0537141f0a9f692.jpg" /></a>
+      </div>
+
+      <div class="card-info">
+
+        <div class="name">
+          <p>Post title</p>
+        </div>
+        <div class="content">
+          <p>
+            <b>Query : </b>
+            <%= @post.content %>
+          </p>
+          <p><b>Post by:</b> <%= @post.user.email %></p>
+          <p><b><%= link_to 'Back', posts_path %>
+          <%if can? :update,@post%>
+          <%= link_to 'Edit', edit_post_path(@post) %>
+          <%end%></b> </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="global">
+<div class="createComment">
+  <div class="postform">
+   <%= form_for @comment, :url => comments_path(post_id:@post.id), remote: true do |task|%>
+   <label>
+     <%= task.text_area :content , placeholder:"Comment",id:"comment",:required => true,:maxlength => 180%>
+   </label>
+      <div class="actions">
+        <%= task.submit id: 'create_comment_submit', value:"submit",class:"submit"%>
+      </div>
+      <% end %>
+      <% if @comment.errors.any? %>
+      <% @comment.errors.full_messages.each do |message| %>
+          <%= message %>
+        <% end %>
+      <% end %>
+</div>
+</div>
+
+<div id="comments">
+  <% @commentfeed.each do |comment| %>
+  <%= render 'comment' , comment: comment %>
+
+  <% end %>
+</div>
+
+
+</div>

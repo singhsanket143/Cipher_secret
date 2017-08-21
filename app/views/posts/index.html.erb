@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>3d flexbox flippable card with shiny!
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css'>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400' rel='stylesheet' type='text/css'>
+
+    <style>
+      #navi {
+        /*height:200px;*/
+      }
+      .circle {
+        position: absolute;
+        /*top: -$radius;
+left: -$radius;*/
+        top: 0;
+        left: 0;
+        width: 15em;
+        height: 15em;
+        -webkit-transition: width 0.3s, height 0.3s, -webkit-transform 0.3s;
+        transition: width 0.3s, height 0.3s, -webkit-transform 0.3s;
+        transition: width 0.3s, height 0.3s, transform 0.3s;
+        transition: width 0.3s, height 0.3s, transform 0.3s, -webkit-transform 0.3s;
+        -webkit-transform-origin: top left;
+        transform-origin: top left;
+        border-bottom-right-radius: 100%;
+        /*transition: top 0.3s, left 0.3s;
+&:hover {
+  top: -1em;
+  left: -1em;
+}*/
+      }
+      .circle .link {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .circle .link::before {
+        position: absolute;
+        display: block;
+        color: white;
+        font-family: 'FontAwesome';
+        font-size: 1.5em;
+        top: 1em;
+        right: 1em;
+      }
+
+      .wrapcircles.closed .circle {
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+        width: 5em;
+        height: 5em;
+        -webkit-transition-delay: 0s;
+        transition-delay: 0s;
+      }
+      .wrapcircles.closed #click {
+        -webkit-transform: none;
+        transform: none;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+      }
+      .wrapcircles.closed #click span {
+        top: 1.125em;
+        right: 2em;
+      }
+      .wrapcircles.closed #click span::after {
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+      }
+      .wrapcircles.closed #click span::before {
+        -webkit-transform: none;
+        transform: none;
+      }
+
+      #click {
+        cursor: pointer;
+      }
+
+      #click span {
+        -webkit-transition: bottom 0.3s, left 0.3s;
+        transition: bottom 0.3s, left 0.3s;
+        display: block;
+        width: 30px;
+        height: 30px;
+        top: 1em;
+        right: 1em;
+        position: absolute;
+      }
+      #click span::after,
+      #click span::before {
+        display: block;
+        position: absolute;
+        font-family: inherit;
+        content: '';
+        width: 30px;
+        height: 8px;
+        -webkit-transition: -webkit-transform 0.3s;
+        transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+        transition: transform 0.3s, -webkit-transform 0.3s;
+        top: 11px;
+        border-radius: 3px;
+        background: white;
+      }
+      #click span::before {
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+      }
+      #click span::after {
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+
+      .c-1 {
+        background: #43A047;
+        -webkit-transition-delay: 0.1s, 0.1s, 0.1s;
+        transition-delay: 0.1s, 0.1s, 0.1s;
+        -webkit-transform: rotate(18deg);
+        transform: rotate(18deg);
+      }
+      .c-1 .link::before {
+        -webkit-transform: rotate(-18deg);
+        transform: rotate(-18deg);
+        content: '\f015';
+      }
+
+      .c-2 {
+        background: #388E3C;
+        -webkit-transition-delay: 0.2s, 0.2s, 0.2s;
+        transition-delay: 0.2s, 0.2s, 0.2s;
+        -webkit-transform: rotate(36deg);
+        transform: rotate(36deg);
+      }
+      .c-2 .link::before {
+        -webkit-transform: rotate(-36deg);
+        transform: rotate(-36deg);
+        content: '\f044';
+      }
+
+      .c-3 {
+        -webkit-transition-delay: 0.3s,0.3s, 0.3s;
+        transition-delay: 0.3s,0.3s, 0.3s;
+        background: #2E7D32;
+        -webkit-transform: rotate(54deg);
+        transform: rotate(54deg);
+      }
+      .c-3 .link::before {
+        -webkit-transform: rotate(-54deg);
+        transform: rotate(-54deg);
+        content: '\f128';
+      }
+
+      .c-4 {
+        -webkit-transition-delay: 0.4s, 0.4s, 0.4s;
+        transition-delay: 0.4s, 0.4s, 0.4s;
+        background: #1B5E20;
+        -webkit-transform: rotate(72deg);
+        transform: rotate(72deg);
+      }
+      .c-4 .link::before {
+        -webkit-transform: rotate(-72deg);
+        transform: rotate(-72deg);
+        content: '\f09a';
+      }
+
+      .c-5 {
+        background: #4CAF50;
+        z-index: -1;
+      }
+
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+    </style>
+    <style media="screen">
+      /*html,
+body {
+  height: 100%;
+}
+body {
+
+  background-color: #f9f9f9;
+}*/
+      #posts {
+        top: 200px;
+        padding: 30px;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .post {
+        display: flex;
+      }
+      .fx-wrap {
+        display: inline-block;
+        padding-left: 2px;
+        padding-right: 2px;
+        overflow: hidden;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 7px;
+      }
+      .fx-wrap:hover {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+      }
+      .fx-wrap .card {
+        perspective: 1000px;
+        width: 340px;
+        height: 204px;
+        position: relative;
+      }
+      .fx-wrap .card:hover {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+      }
+      .fx-wrap .card > .back,
+      .fx-wrap .card > .front {
+        transition: transform 3s, z-index 3s 0s, box-shadow 3s;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        will-change: transform;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        border-radius: 4px;
+        background-color: #fff;
+        backface-visibility: hidden;
+      }
+      .fx-wrap .card > .back:before,
+      .fx-wrap .card > .front:before {
+        transition: all 1s;
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-size: contain;
+        background-image: linear-gradient(135deg, rgba(238,238,238,0) 0%, rgba(255,255,255,0) 36%, rgba(255,255,255,0.4) 36%, rgba(255,255,255,0.4) 68%, rgba(247,247,247,0) 69%, rgba(238,238,238,0) 70%);
+        background-repeat: no-repeat;
+        background-position: 324px 0;
+        pointer-events: none;
+        z-index: 20;
+      }
+      .fx-wrap .card > .back > *,
+      .fx-wrap .card > .front > * {
+        height: 100%;
+      }
+      .fx-wrap .card > .back .image,
+      .fx-wrap .card > .front .image {
+        float: left;
+      }
+      .fx-wrap .card > .back .text,
+      .fx-wrap .card > .front .text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 216px;
+        float: right;
+      }
+      .fx-wrap .card > .back .text button.flip,
+      .fx-wrap .card > .front .text button.flip {
+        border-radius: 9999em;
+        width: 30px;
+        height: 30px;
+        margin: 10px;
+        border: 0;
+        background-color: #ddd;
+        color: #fff;
+        font-size: 1.5em;
+        float: right;
+        flex: 1;
+        outline: 0;
+        transition: background-color 0.3s ease-in, transform 0.4s;
+        transition-delay: 0.1s;
+      }
+      .fx-wrap .card > .back .text button.flip:hover,
+      .fx-wrap .card > .front .text button.flip:hover {
+        background-color: #16a8cf;
+      }
+      .fx-wrap .card > .back .text button.flip:focus,
+      .fx-wrap .card > .front .text button.flip:focus {
+        transform: rotate(-360deg);
+      }
+      .fx-wrap .card > .back .text p,
+      .fx-wrap .card > .front .text p {
+        margin: 0 auto;
+        width: 80%;
+        flex: 2;
+      }
+
+      .fx-wrap .card > .back .text a.dlt,
+      .fx-wrap .card > .front .text a.dlt {
+        text-transform: uppercase;
+        margin: 10px auto;
+        text-align: left;
+        width: 40%;
+        display: inline-flex;
+        flex: 1;
+      }
+      .fx-wrap .card > .back .text a.shw,
+      .fx-wrap .card > .front .text a.shw {
+        text-transform: uppercase;
+        margin: 10px auto;
+        text-align: right;
+        width: 40%;
+        display: inline-flex;
+        flex: 1;
+      }
+      .fx-wrap .card > .back .image,
+      .fx-wrap .card > .front .image {
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        background-size: cover;
+        width: 108px;
+        background-color: #f5f5f5;
+        position: relative;
+      }
+      .fx-wrap .card > .back .image .heading,
+      .fx-wrap .card > .front .image .heading {
+        position: absolute;
+        bottom: 50px;
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding: 10px;
+        font-size: 1em;
+        text-align: right;
+        color: #fff;
+        text-transform: uppercase;
+      }
+      .fx-wrap .card > .back .image .time,
+      .fx-wrap .card > .front .image .time {
+        position: absolute;
+        bottom: 1px;
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding: 10px;
+        font-size: 1em;
+        text-align: right;
+        color: #fff;
+        /*text-transform: uppercase;*/
+      }
+      .fx-wrap .card > .front {
+        z-index: 2;
+        transform: rotateY(0deg);
+      }
+      .fx-wrap .card > .back {
+        z-index: 1;
+        transform: rotateY(180deg);
+      }
+      .fx-wrap .card > .back .text,
+      .fx-wrap .card > .back header {
+        width: 100%;
+      }
+      .fx-wrap .card > .back .text b,
+      .fx-wrap .card > .back header b {
+        color: #0098a6;
+        width: 80%;
+        margin: 0 auto;
+      }
+      .fx-wrap .card > .back .text p,
+      .fx-wrap .card > .back header p {
+        margin: 20px auto;
+      }
+      .fx-wrap .card.flip-it > .front {
+        transform: rotateY(-180deg);
+        z-index: 1;
+      }
+      .fx-wrap .card.flip-it > .back {
+        transform: rotateY(0deg);
+        z-index: 2;
+      }
+      .fx-wrap .card.flip-it > .back:before,
+      .fx-wrap .card.flip-it > .front:before {
+        background-position: -324px 0;
+      }
+      div.createPost {
+        top: 500px;
+        height: 400px;
+        margin-top: 30px;
+        padding-left: 100px;
+        display: flex;
+      }
+
+    </style>
+
+  </head>
+  <body>
+
+    <div id="navbar" class="wrapcircles closed">
+      <div class="circle c-1">
+        <span>
+          <a class="link" href="/dashboard"></a>
+        </span>
+      </div>
+      <div class="circle c-2">
+        <span>
+          <a class="link" href="/ide"></a>
+        </span>
+      </div>
+      <div class="circle c-3">
+        <span>
+          <a class="link" href="/questions"></a>
+        </span>
+      </div>
+      <div class="circle c-4">
+        <span>
+          <a class="link" href="https://www.facebook.com/"></a>
+        </span>
+      </div>
+      <div id="click" class="circle c-5">
+        <span>
+          <a class="link"></a>
+        </span>
+      </div>
+
+    </div>
+
+    <script src='https://use.fontawesome.com/6dda48562f.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+
+    <script>
+      $("#click").click(function () {
+        $("#navbar").toggleClass("closed");
+      });
+    </script>
+
+    <div class="createPost">
+      <div id="form-main">
+        <div id="form-div">
+
+          <%= form_for @post, remote: true do |task|%>
+          <p class="text">
+            <!-- <%= task.label :content %> -->
+
+            <%= task.text_area :content ,class:"validate[required,length[6,300]] feedback-input" , placeholder:"Query",id:"post_content",:required => true,:maxlength => 180%>
+          </p>
+
+          <div class="actions">
+            <div class="submit">
+
+              <%= task.submit id: 'button-blue',class:"linksub",value:"post"%>
+              <div class="ease"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <% if @post.errors.any? %>
+    <% @post.errors.full_messages.each do |message| %>
+    <%= message %>
+    <% end %>
+    <% end %>
+  </div>
+
+  <style media="screen">
+    @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+    #feedback-page {
+      text-align: center;
+    }
+
+    #form-main {
+      width: 100%;
+      float: left;
+      padding-top: 0;
+    }
+
+    #form-div {
+      background-color: rgba(123, 123, 123, 0.4);
+      padding: 30px;
+      width: 450px;
+      float: left;
+      left: 50%;
+      position: absolute;
+      margin-top: 30px;
+      margin-left: -260px;
+      -moz-border-radius: 7px;
+      -webkit-border-radius: 7px;
+    }
+    #form-div:hover {
+      box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+    .feedback-input {
+      color: #3c3c3c;
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight: 500;
+      font-size: 18px;
+      border-radius: 0;
+      line-height: 22px;
+      background-color: #fbfbfb;
+      padding: 13px 13px 13px 54px;
+      margin-bottom: 10px;
+      width: 100%;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+      box-sizing: border-box;
+      border: 3px solid rgba(0,0,0,0);
+    }
+    .feedback-input:focus {
+      background: #fff;
+      box-shadow: 0;
+      border: 3px solid #3498db;
+      color: #3498db;
+      outline: none;
+      padding: 13px 13px 13px 54px;
+    }
+
+    .focused {
+      color: #30aed6;
+      border: #30aed6 solid 3px;
+    }
+
+    /* Icons ---------------------------------- */
+
+    #post_content {
+      background-image: url("http://rexkirby.com/kirbyandson/images/comment.svg");
+      background-size: 30px 30px;
+      background-position: 11px 8px;
+      background-repeat: no-repeat;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      line-height: 150%;
+      resize: vertical;
+    }
+    input:focus,
+    input:hover,
+    textarea:focus,
+    textarea:hover {
+      background-color: white;
+    }
+
+    #button-blue {
+      /*content:"f1d8";*/
+      font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+      float: left;
+      width: 100%;
+      border: #fbfbfb solid 4px;
+      cursor: pointer;
+      background-color: #3498db;
+      color: white;
+      font-size: 24px;
+      padding-top: 22px;
+      padding-bottom: 22px;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      transition: all 0.3s;
+      margin-top: -4px;
+      font-weight: 700;
+
+    }
+    #button-blue:hover {
+      background-color: rgba(0,0,0,0);
+      color: #0493bd;
+    }
+   .linksub::before {
+
+
+      font-family: 'FontAwesome';
+
+    }
+ .linksub::before {
+  -webkit-transform: rotate(-36deg);
+  transform: rotate(-36deg);
+  content: '\f044';
+}
+  .submit:hover {
+      color: #3498db;
+    }
+
+    .ease {
+      width: 0;
+      height: 74px;
+      background-color: #fbfbfb;
+      -webkit-transition: 0.3s ease;
+      -moz-transition: 0.3s ease;
+      -o-transition: 0.3s ease;
+      -ms-transition: 0.3s ease;
+      transition: 0.3s ease;
+    }
+    .submit:hover .ease {
+      width: 100%;
+      background-color: white;
+    }
+    @media only screen and (max-width: 580px) {
+      #form-div {
+        left: 3%;
+        margin-right: 3%;
+        width: 88%;
+        margin-left: 0;
+        padding-left: 3%;
+        padding-right: 3%;
+      }
+    }
+
+  </style>
+
+  <div id="posts">
+    <% @feed.each do |post| %>
+    <%= render 'post' , post: post %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  'use strict';
+
+  $(document).on('click', '.flip', function () {
+    var card = $(this).closest('.card');
+    if (card.hasClass('flip-it'))
+      card.removeClass('flip-it');
+    else
+      card.addClass('flip-it');
+    }
+  );
+
+  $('.card').each(function () {
+    var href = $(this).data('href');
+    $(this).find('.image').css({
+      backgroundImage: ['url(', href, ')'].join('')
+    });
+  });
+</script>
+
+</body>
+</html>
