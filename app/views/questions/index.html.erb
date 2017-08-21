@@ -2,333 +2,531 @@
 <!DOCTYPE html>
 <html >
 <head>
-  <meta charset="UTF-8">
-  <title>Questions</title>
+<meta charset="UTF-8">
+<title>Questions</title>
 
 
 
-  <style media="screen">
-   @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900);
-   body {
-    background: #ded7ed;
-    color: #4f585e;
-    font-family: 'Source Sans Pro', sans-serif;
-    text-rendering: optimizeLegibility;
-  }
-  a.btn {
-    background: #0096a0;
-    border-radius: 4px;
-    box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.25);
-    color: #ffffff;
-    display: inline-block;
-    padding: 6px 30px 8px;
-    position: relative;
-    text-decoration: none;
-    -webkit-transition: all 0.1s 0s ease-out;
-    transition: all 0.1s 0s ease-out;
-  }
-  .no-touch a.btn:hover {
-    background: #00a2ad;
-    box-shadow: 0px 8px 2px 0 rgba(0, 0, 0, 0.075);
-    -webkit-transform: translateY(-2px);
-    transform: translateY(-2px);
-    -webkit-transition: all 0.25s 0s ease-out;
-    transition: all 0.25s 0s ease-out;
-  }
-  .no-touch a.btn:active,
-  a.btn:active {
-    background: #008a93;
-    box-shadow: 0 1px 0px 0 rgba(255, 255, 255, 0.25);
-    -webkit-transform: translate3d(0, 1px, 0);
-    transform: translate3d(0, 1px, 0);
-    -webkit-transition: all 0.025s 0s ease-out;
-    transition: all 0.025s 0s ease-out;
-  }
-  div.cards {
-    margin: 80px auto;
-    max-width: 960px;
-    text-align: center;
-  }
-  div.card {
-    background: #ffffff;
-    display: inline-block;
-    margin: 8px;
-    max-width: 300px;
-    -webkit-perspective: 1000;
-    perspective: 1000;
-    position: relative;
-    text-align: left;
-    -webkit-transition: all 0.3s 0s ease-in;
-    transform-style: flat;
-    transition: all 250ms ease-out;
-  }
+<style media="screen">
+@import url(
+https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900
+);
+html{
+background-image:url(
+https://assets.awwwards.com/awards/images/2015/04/pattern.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+}
+body {
+background :transparent;
+color: #4f585e;
+font-family: 'Source Sans Pro', sans-serif;
+text-rendering: optimizeLegibility;
+}
+a.btn {
+background: #0096a0;
+border-radius: 4px;
+box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.25);
+color: #ffffff;
+display: inline-block;
+padding: 6px 30px 8px;
+position: relative;
+text-decoration: none;
+-webkit-transition: all 0.1s 0s ease-out;
+transition: all 0.1s 0s ease-out;
+}
+.no-touch a.btn:hover {
+background: #00a2ad;
+box-shadow: 0px 8px 2px 0 rgba(0, 0, 0, 0.075);
+-webkit-transform: translateY(-2px);
+transform: translateY(-2px);
+-webkit-transition: all 0.25s 0s ease-out;
+transition: all 0.25s 0s ease-out;
+}
+.no-touch a.btn:active,
+a.btn:active {
+background: #008a93;
+box-shadow: 0 1px 0px 0 rgba(255, 255, 255, 0.25);
+-webkit-transform: translate3d(0, 1px, 0);
+transform: translate3d(0, 1px, 0);
+-webkit-transition: all 0.025s 0s ease-out;
+transition: all 0.025s 0s ease-out;
+}
+div.cards {
+margin: 80px auto;
+margin-top: 180px;
+max-width: 960px;
+text-align: center;
+}
+div.card {
+background: #ffffff;
+display: inline-block;
+margin: 8px;
+max-width: 300px;
+-webkit-perspective: 1000;
+perspective: 1000;
+position: relative;
+text-align: left;
+-webkit-transition: all 0.3s 0s ease-in;
+transform-style: flat;
+transition: all 250ms ease-out;
+}
 
-  .card:before, .card:after {
-    content: "";
-    position: absolute;
-    z-index: -2;
-    transition: all 250ms ease-out;
-  }
+.card:before, .card:after {
+content: "";
+position: absolute;
+z-index: -2;
+transition: all 250ms ease-out;
+}
 
-  /* Paper effect – slightly raised off background */
-  .paper {
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(128, 128, 128, 0.1) inset;
-    border-color: #dedede;
-  }
+/* Paper effect – slightly raised off background */
+.paper {
+box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(128, 128, 128,
+0.1) inset;
+border-color: #dedede;
+}
 
 
 
-  /* Flatten effect – flattens sides on hover */
-  .paper-flatten {
-    border: 1px solid transparent;
-  }
-  .paper-flatten:before, .paper-flatten:after {
-    bottom: 15px;
-    width: 50%;
-    height: 20%;
-    max-width: 300px;
-    max-height: 100px;
-    box-shadow: 0 20px 22px rgba(31, 31, 31, 0.7);
-  }
-  .paper-flatten:before {
-    left: 10px;
-    transform: rotate(-3deg);
-  }
-  .paper-flatten:after {
-    right: 10px;
-    transform: rotate(3deg);
-  }
-  .paper-flatten:hover {
-    border-color: #ccc;
-  }
-  .paper-flatten:hover:before, .paper-flatten:hover:after {
-    transition: box-shadow 600ms ease-out, left 200ms, right 200ms;
-    box-shadow: 0 8px 8px rgba(31, 31, 31, 0.5);
-  }
-  .paper-flatten:hover:before {
-    left: 5px;
-  }
-  .paper-flatten:hover:after {
-    right: 5px;
-  }
+/* Flatten effect – flattens sides on hover */
+.paper-flatten {
+border: 1px solid transparent;
+}
+.paper-flatten:before, .paper-flatten:after {
+bottom: 15px;
+width: 50%;
+height: 20%;
+max-width: 300px;
+max-height: 100px;
+box-shadow: 0 20px 22px rgba(31, 31, 31, 0.7);
+}
+.paper-flatten:before {
+left: 10px;
+transform: rotate(-3deg);
+}
+.paper-flatten:after {
+right: 10px;
+transform: rotate(3deg);
+}
+.paper-flatten:hover {
+border-color: #ccc;
+}
+.paper-flatten:hover:before, .paper-flatten:hover:after {
+transition: box-shadow 600ms ease-out, left 200ms, right 200ms;
+box-shadow: 0 8px 8px rgba(31, 31, 31, 0.5);
+}
+.paper-flatten:hover:before {
+left: 5px;
+}
+.paper-flatten:hover:after {
+right: 5px;
+}
 
-  div.card img {
-    max-width: 300px;
-  }
-  div.card div.card-title {
-    background: #ffffff;
-    padding: 6px 15px 10px;
-    position: relative;
-    z-index: 0;
-  }
-  div.card div.card-title a.toggle-info {
-    border-radius: 32px;
-    height: 32px;
-    padding: 0;
-    position: absolute;
-    right: 15px;
-    top: 10px;
-    width: 32px;
-  }
-  div.card div.card-title a.toggle-info span {
-    background: #ffffff;
-    display: block;
-    height: 2px;
-    position: absolute;
-    top: 16px;
-    -webkit-transition: all 0.15s 0s ease-out;
-    transition: all 0.15s 0s ease-out;
-    width: 12px;
-  }
-  div.card div.card-title a.toggle-info span.left {
-    right: 14px;
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
-  div.card div.card-title a.toggle-info span.right {
-    left: 14px;
-    -webkit-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-  }
-  div.card div.card-title h2 {
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: -0.05em;
-    margin: 0;
-    padding: 0;
-  }
-  div.card div.card-title h2 small {
-    display: block;
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: -0.025em;
-  }
-  div.card div.card-description {
-    padding: 0 15px 10px;
-    position: relative;
-    font-size: 14px;
-  }
-  div.card div.card-actions {
-    box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.075);
-    padding: 10px 15px 20px;
-    text-align: center;
-  }
-  div.card div.card-flap {
-    background: #d9d9d9;
-    position: absolute;
-    width: 100%;
-    -webkit-transform-origin: top;
-    transform-origin: top;
-    -webkit-transform: rotateX(-90deg);
-    transform: rotateX(-90deg);
-  }
-  div.card div.flap1 {
-    -webkit-transition: all 0.3s 0.3s ease-out;
-    transition: all 0.3s 0.3s ease-out;
-    z-index: -1;
-  }
-  div.card div.flap2 {
-    -webkit-transition: all 0.3s 0s ease-out;
-    transition: all 0.3s 0s ease-out;
-    z-index: -2;
-  }
-  div.cards.showing div.card {
-    cursor: pointer;
-    opacity: 0.6;
-    -webkit-transform: scale(0.88);
-    transform: scale(0.88);
-  }
-  .no-touch div.cards.showing div.card:hover {
-    opacity: 0.94;
-    -webkit-transform: scale(0.92);
-    transform: scale(0.92);
-  }
-  div.card.show {
-    opacity: 1 !important;
-    -webkit-transform: scale(1) !important;
-    transform: scale(1) !important;
-  }
-  div.card.show div.card-title a.toggle-info {
-    background: #ff6666 !important;
-  }
-  div.card.show div.card-title a.toggle-info span {
-    top: 15px;
-  }
-  div.card.show div.card-title a.toggle-info span.left {
-    right: 10px;
-  }
-  div.card.show div.card-title a.toggle-info span.right {
-    left: 10px;
-  }
-  div.card.show div.card-flap {
-    background: #ffffff;
-    -webkit-transform: rotateX(0deg);
-    transform: rotateX(0deg);
-  }
-  div.card.show div.flap1 {
-    -webkit-transition: all 0.3s 0s ease-out;
-    transition: all 0.3s 0s ease-out;
-  }
-  div.card.show div.flap2 {
-    -webkit-transition: all 0.3s 0.2s ease-out;
-    transition: all 0.3s 0.2s ease-out;
-  }
-  .problem-img-overlay {
-   background-color:rgba(2,204,186,.7)
- }
- img-overlay,.problem-img-overlay {
-   position:absolute;
-   top:0;
-   bottom:0;
-   right:0;
-   width:100%;
-   transition:.5s ease;
-   border-top-left-radius:3px;
-   border-top-right-radius:3px;
-   left:0
- }
+div.card img {
+max-width: 300px;
+}
+div.card div.card-title {
+background: #ffffff;
+padding: 6px 15px 10px;
+position: relative;
+z-index: 0;
+}
+div.card div.card-title a.toggle-info {
+border-radius: 32px;
+height: 32px;
+padding: 0;
+position: absolute;
+right: 15px;
+top: 10px;
+width: 32px;
+}
+div.card div.card-title a.toggle-info span {
+background: #ffffff;
+display: block;
+height: 2px;
+position: absolute;
+top: 16px;
+-webkit-transition: all 0.15s 0s ease-out;
+transition: all 0.15s 0s ease-out;
+width: 12px;
+}
+div.card div.card-title a.toggle-info span.left {
+right: 14px;
+-webkit-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+div.card div.card-title a.toggle-info span.right {
+left: 14px;
+-webkit-transform: rotate(-45deg);
+transform: rotate(-45deg);
+}
+div.card div.card-title h2 {
+font-size: 24px;
+font-weight: 700;
+letter-spacing: -0.05em;
+margin: 0;
+padding: 0;
+}
+div.card div.card-title h2 small {
+display: block;
+font-size: 18px;
+font-weight: 600;
+letter-spacing: -0.025em;
+}
+div.card div.card-description {
+padding: 0 15px 10px;
+position: relative;
+font-size: 14px;
+}
+div.card div.card-actions {
+box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.075);
+padding: 10px 15px 20px;
+text-align: center;
+}
+div.card div.card-flap {
+background: #d9d9d9;
+position: absolute;
+width: 100%;
+-webkit-transform-origin: top;
+transform-origin: top;
+-webkit-transform: rotateX(-90deg);
+transform: rotateX(-90deg);
+}
+div.card div.flap1 {
+-webkit-transition: all 0.3s 0.3s ease-out;
+transition: all 0.3s 0.3s ease-out;
+z-index: -1;
+}
+div.card div.flap2 {
+-webkit-transition: all 0.3s 0s ease-out;
+transition: all 0.3s 0s ease-out;
+z-index: -2;
+}
+div.cards.showing div.card {
+cursor: pointer;
+opacity: 0.6;
+-webkit-transform: scale(0.88);
+transform: scale(0.88);
+}
+.no-touch div.cards.showing div.card:hover {
+opacity: 0.94;
+-webkit-transform: scale(0.92);
+transform: scale(0.92);
+}
+div.card.show {
+opacity: 1 !important;
+-webkit-transform: scale(1) !important;
+transform: scale(1) !important;
+}
+div.card.show div.card-title a.toggle-info {
+background: #ff6666 !important;
+}
+div.card.show div.card-title a.toggle-info span {
+top: 15px;
+}
+div.card.show div.card-title a.toggle-info span.left {
+right: 10px;
+}
+div.card.show div.card-title a.toggle-info span.right {
+left: 10px;
+}
+div.card.show div.card-flap {
+background: #ffffff;
+-webkit-transform: rotateX(0deg);
+transform: rotateX(0deg);
+}
+div.card.show div.flap1 {
+-webkit-transition: all 0.3s 0s ease-out;
+transition: all 0.3s 0s ease-out;
+}
+div.card.show div.flap2 {
+-webkit-transition: all 0.3s 0.2s ease-out;
+transition: all 0.3s 0.2s ease-out;
+}
+.problem-img-overlay {
+background-color:rgba(2,204,186,.7)
+}
+img-overlay,.problem-img-overlay {
+position:absolute;
+top:0;
+bottom:0;
+right:0;
+width:100%;
+transition:.5s ease;
+border-top-left-radius:3px;
+border-top-right-radius:3px;
+left:0
+}
 
 </style>
 </head>
 <body>
 
- <%= link_to "logOut", destroy_user_session_path ,method: :delete%>
- <div class="cards">
-   <% @questions.each do |question| %>
-   <div class="card paper-flatten">
-     <div class="problem-image-wrapper">
-      <div class="problem-img-overlay"></div>
-      <img src="https://s1.postimg.org/wyhyiimtb/image.png" width="100%">
-    </div>
-    <div class="card-title">
-      <a href="#" class="toggle-info btn">
-        <span class="left"></span>
-        <span class="right"></span>
-      </a>
-      <h2>
-        <%= question.title %>
-        <small>Image from unsplash.com</small>
-      </h2>
-    </div>
-    <div class="card-flap flap1">
-      <div class="card-description">
-       <%= question.content %>
-     </div>
-     <div class="card-flap flap2">
-      <div class="card-actions">
-      <%= link_to 'Solve',url_for(controller: :questions,action: :show, id: question.id), method: :get,:class=> "btn" %>
-     </div>
-   </div>
- </div>
+
+
+
+<style type="text/css">
+* {margin: 0;padding: 0;outline: none;-webkit-box-sizing:
+border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+*:after, *:before { -webkit-box-sizing: border-box;-moz-box-sizing:
+border-box;box-sizing: border-box;}
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section {
+display: block;}
+html {font-size: 100%;height: auto !important;height:
+100%;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;}
+.clear {display: block; }
+.clear::after {clear: both;content: ".";display: block;height:
+1px;visibility: hidden;}
+
+/*GENERIC STYLES*/
+/*body { background: transparent;color: #222;-webkit-font-smoothing:
+antialiased;font-family: 'Helvetica Neue', Helvetica, Arial,
+sans-serif;font-size: 1.05em;font-weight: 400;height: auto
+!important;height: 100%;line-height: 1.6rem;min-height: 100%;}*/
+/*NAV*/
+header {
+top: 0px;
+
+background: linear-gradient(to left,rgba(54,194,182,0.96)
+0,rgba(62,188,207,0.96) 100%);
+border-bottom: 1px solid rgba(0,0,0,.1);
+box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+display: block;
+position: fixed;
+width: 100%;
+z-index: 1000;
+}
+
+header > nav > ul {
+display: flex;
+flex-wrap: wrap;
+justify-content: flex-start;
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+header > nav > ul > li {
+flex: 0 1 auto;
+margin: 0;
+padding: 0;
+position: relative;
+transition: all linear 0.1s;
+}
+
+header > nav > ul > li:hover {
+background: rgba(58,162,173,1);
+}
+
+header > nav > ul > li a + div {
+background: linear-gradient(to bottom,rgba(58,162,173,1)
+0,rgba(62,188,207,0.96) 100%);;
+border-radius: 0 0 2px 2px;
+box-shadow: 0 3px 1px rgba(0,0,0,.05);
+display: none;
+font-size: 1rem;
+position: absolute;
+width: 195px;
+}
+
+header > nav > ul > li:hover a + div {
+display: block;
+}
+
+header > nav > ul > li a + div > ul {
+list-style-type: none;
+}
+
+header > nav > ul > li a + div > ul > li {
+margin: 0;
+padding: 0;
+}
+
+header > nav > ul > li a + div > ul > li > a {
+color: rgba(255,255,255,.9);
+display: block;
+font-size: .75rem;
+letter-spacing: 1.5px;
+padding: .25rem 1.5rem;
+text-decoration: none;
+text-transform: uppercase;
+}
+
+header > nav > ul > li a + div > ul > li:hover > a {
+background-color: rgba(0,0,0,.15);
+}
+
+header > nav > ul > li > a {
+align-items: flex-start;
+color: #fff;
+display: flex;
+font-size: 1.55rem;
+font-weight: 200;
+letter-spacing: 1px;
+max-width: 130px;
+padding: 1rem 1.5rem;
+text-decoration: none;
+text-shadow: 0 1px 1px rgba(0,0,0,.1);
+transition: all linear 0.1s;
+}
+
+header > nav > ul > li > a > div > span {
+color: rgba(255,255,255,.75);
+display: block;
+font-family: Georgia, "Times New Roman", Times, serif;
+font-size: .7rem;
+font-style: italic;
+line-height: 1rem;
+max-width: 260px;
+}
+
+@media (min-width: 990px) {
+header > nav > ul > li > a {
+max-width: 500px;
+font-size: 1.7rem;
+line-height: 2rem;
+}
+
+header > nav > ul > li > a > div > span {
+margin: 4px 0 0;
+}
+}
+</style>
+
+<header>
+<nav role="navigation">
+<ul>
+<li>
+<a href="/">
+<div>
+Home
+<span>there's no place like it</span>
+</div>
+</a>
+</li>
+<li>
+<a href="/blog">
+<div>
+Blog
+<span>my thoughts rock</span>
+</div>
+</a><div>
+<ul>
+<li><a href="#">Me</a></li>
+<li><a href="#">Gaming</a></li>
+<li><a href="#">Sport</a></li>
+<li><a href="#">Web Design</a></li>
+<li><a href="#">Web Development</a></li>
+</ul>
+</div>
+</li>
+<li>
+<a href="/contact">
+<div>
+Contact
+<span>drop me a line</span>
+</div>
+</a>
+</li>
+<li>
+<a href="/forum">
+<div>
+Forum
+<span>chat with others</span>
+</div>
+</a>
+</li>
+<li>
+<%= link_to "logOut", destroy_user_session_path ,method: :delete%>
+<div>
+LogOut
+<span>Log out</span>
+</div>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+
+
+
+<div class="cards">
+<% @questions.each do |question| %>
+<div class="card paper-flatten">
+<div class="problem-image-wrapper">
+<div class="problem-img-overlay"></div>
+<img src="https://s1.postimg.org/wyhyiimtb/image.png" width="100%">
+</div>
+<div class="card-title">
+<a href="#" class="toggle-info btn">
+<span class="left"></span>
+<span class="right"></span>
+</a>
+<h2>
+<%= question.title %>
+<!-- <small>Image from unsplash.com</small> -->
+</h2>
+</div>
+<div class="card-flap flap1">
+<div class="card-description">
+<%= question.content %>
+</div>
+<div class="card-flap flap2">
+<div class="card-actions">
+<%= link_to 'Solve',url_for(controller: :questions,action: :show, id:
+question.id), method: :get,:class=> "btn" %>
+</div>
+</div>
+</div>
 </div>
 <% end %>
 </div>
-  <script type="text/javascript">
-    $(document).ready(function(){
-      var zindex = 10;
+<script type="text/javascript">
+$(document).ready(function(){
+var zindex = 10;
 
-      $("div.card").click(function(e){
-        e.preventDefault();
+$("div.card").click(function(e){
+e.preventDefault();
 
-        var isShowing = false;
+var isShowing = false;
 
-        if ($(this).hasClass("show")) {
-          isShowing = true
-        }
+if ($(this).hasClass("show")) {
+isShowing = true
+}
 
-        if ($("div.cards").hasClass("showing")) {
-          // a card is already in view
-          $("div.card.show")
-          .removeClass("show");
+if ($("div.cards").hasClass("showing")) {
+// a card is already in view
+$("div.card.show")
+.removeClass("show");
 
-          if (isShowing) {
-            // this card was showing - reset the grid
-            $("div.cards")
-            .removeClass("showing");
-          } else {
-            // this card isn't showing - get in with it
-            $(this)
-            .css({zIndex: zindex})
-            .addClass("show");
+if (isShowing) {
+// this card was showing - reset the grid
+$("div.cards")
+.removeClass("showing");
+} else {
+// this card isn't showing - get in with it
+$(this)
+.css({zIndex: zindex})
+.addClass("show");
 
-          }
+}
 
-          zindex++;
+zindex++;
 
-        } else {
-          // no cards in view
-          $("div.cards")
-          .addClass("showing");
-          $(this)
-          .css({zIndex:zindex})
-          .addClass("show");
+} else {
+// no cards in view
+$("div.cards")
+.addClass("showing");
+$(this)
+.css({zIndex:zindex})
+.addClass("show");
 
-          zindex++;
-        }
+zindex++;
+}
 
-      });
-    });
-  </script>
+});
+});
+</script>
 
 </body>
 </html>
