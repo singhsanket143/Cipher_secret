@@ -1,5 +1,36 @@
+// console.log("<%=@val["result"]["stdout"]%>");
+// $('#result').html("hy");
 noty({text: 'Code was Successfully evaluated', type: 'success', timeout: 3500, progressBar: true});
-// console.log("<%= @val["result"]["stdout"]%>");
 var x = document.getElementsByClassName("resultofcode");
+var a=("<%=@res%>").toString();
+// var result = JSON.stringify(a);
+// console.log(unescape(a));
+// console.log(typeof a );
+// var y=a.split(",");
+// console.log( y);
+var check=("<%=@cases%>")
+console.log(check);
+if(check==a){
+x[0].innerHTML="Correct";
+} else {
+  x[0].innerHTML="no";
+}
+// data=JSON.parse("<%=@res%>");
+// var str=""
+// var data=("<%=@res%>");
+// console.log(data);
+// var str = (data).toString();
+//
+// 		// var str = (data.result.compilemessage).toString();
+// 		str=decodeURIComponent(unescape(data));
+//     console.log(str);
+//     // console.log(str);
+    // (a).forEach(function(item,index){
+    //     // console.log(typeof data);
+    //     // data=unescape(data)
+    // 			str+=(a[index]);
+    //
+    // 		});
+    //     console.log(str);
 
-x[0].innerText="<%= @val["result"]["stdout"]%>";
+// x[0].innerHTML=str

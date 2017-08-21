@@ -877,6 +877,7 @@
           <%= text_area_tag 'source'%>
           <!-- <br>  <br><br><br><br><br><br><br> -->
           <%= hidden_field_tag 'testcases',(@question.inputtestcases)%>
+          <%= hidden_field_tag 'outtestcases',(@question.outputtestcases)%>
           <!-- <div class="new" -->
           <%= select_tag 'format', options_for_select(["JSON","XML"]) %>
           <%= hidden_field_tag 'api_key','hackerrank|2357374-1588|c8cb820f84f230248f9117b777b64f017d2cad2f' %>
@@ -915,6 +916,9 @@
             $(".button").click(function () {
               var textarea = $("#source").val();
               $("#source").val(editor.getValue());
+
+              var x = document.getElementsByClassName("resultofcode");
+              x[0].innerHTML="<img src=\'https://s-media-cache-ak0.pinimg.com/originals/0c/44/da/0c44dacf1b038014a6f941131c5e8aa2.gif\' width=\'100px\' height=\'100px\'>";
             });
           }
         </script>
@@ -1168,14 +1172,18 @@
           height: 90%;
         }
       </style>
+
       <main1 >
         <main>
-          <div id="modal-container">
+          <div id="modal-container" >
             <div class="modal-background">
               <div class="modal">
                 <div class="resultofcode">
-                  hy
-                </div>
+                  <!-- <div > -->Evaluating..
+			                 <div class="loader2"></div>
+			                    <!-- <p>loader 2</p> -->
+		                   </div>
+                <!-- </div> -->
                 <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
                   <rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
                 </svg>

@@ -23,9 +23,11 @@ class QuestionsController < ApplicationController
     response = HTTParty.post("http://api.hackerrank.com/checker/submission.json",:body => permitted);
     @val=JSON.parse(response.body)
     # return redirect_to '/solve'
-
+    @err=response.code
+    @res=@val["result"]["stdout"];
+    @cases=params["outtestcases"]
     # render '/solve'
-    byebug
+    # byebug
 
   end
 

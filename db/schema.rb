@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20170821165255) do
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "posts", force: :cascade do |t|
+    t.string   "title"
     t.text     "content",     null: false
     t.integer  "question_id"
     t.integer  "user_id"

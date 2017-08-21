@@ -1,7 +1,30 @@
 // console.log("<%=@val["result"]["stdout"]%>");
 // $('#result').html("hy");
 noty({text: 'Code was Successfully evaluated', type: 'success', timeout: 3500, progressBar: true});
-console.log("");
 var x = document.getElementsByClassName("result");
+var a=("<%=@res%>");
+// var result = JSON.stringify(a);
+// console.log(unescape(a));
+// console.log(typeof a );
+var y=a.split(",");
+console.log( y);
+x[0].innerHTML=y[0];
+// data=JSON.parse("<%=@res%>");
+// var str=""
+// var data=("<%=@res%>");
+// console.log(data);
+// var str = (data).toString();
+//
+// 		// var str = (data.result.compilemessage).toString();
+// 		str=decodeURIComponent(unescape(data));
+//     console.log(str);
+//     // console.log(str);
+    // (a).forEach(function(item,index){
+    //     // console.log(typeof data);
+    //     // data=unescape(data)
+    // 			str+=(a[index]);
+    //
+    // 		});
+    //     console.log(str);
 
-x[0].innerHTML="<%= @val["result"]["stdout"]%>";
+// x[0].innerHTML=str
