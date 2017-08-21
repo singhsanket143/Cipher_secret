@@ -1,0 +1,45 @@
+<div class="post">
+  <div class="userDetail">
+    <div class="fx-wrap">
+      <%if post.id%2==0%>
+      <div class="card" data-href="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQJW58uxpzvVMvRwWjeU840KqAKGhLNyMT0F5Qh4cgD9rUCihYh">
+        <%else%>
+          <div class="card" data-href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZIbTuWRSqUVqo_Qdo4O9PKBwhRuwHBcmDdJlDez5oSwdXel-7pw">
+          <%end%>
+          <div class="front">
+            <div class="image">
+              <p class="heading">created by:
+                <%= post.user.email %></p>
+              <br>
+              <p class="time"><%= time_ago_in_words(post.created_at) %>
+                ago</p>
+
+            </div>
+            <div class="text">
+              <header class="clearfix">
+                <button class="flip">
+                  <span class="zmdi zmdi-replay"></span>
+                </button>
+              </header>
+              <p><%= post.content %></p>
+              <!-- <a class="shw"> -->
+              <div class="optn">
+                <%= link_to 'Show', {:controller => "posts",:action => "show",  :id => post.id },{class: 'shw'}%>
+                <%if can? :destroy,post%>
+
+                <%= link_to "Delete", post, method: :delete, data: {confirm: "Are you sure?"},:class=>"dlt"%>
+                <%end%>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="back">
+            <div class="text">
+              <header class="clearfix">
+                <button class="flip">
+                  <span class="zmdi zmdi-replay"></span>
+                </button>
+              </header>
+              <b>"Post title"</b>
+              <p><%= post.content %><<br/> <i> Thank you for your support! ❤</i> </p> </div> </div> </div> </div> </div> </div>

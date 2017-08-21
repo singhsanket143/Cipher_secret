@@ -1,0 +1,3 @@
+<% @commentfeed.each do |comment| %>
+$('#comments').append("<%= escape_javascript (render 'posts/comment', comment: comment,post_id: @post.id) %>");
+<% end %>

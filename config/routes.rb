@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :comments
+  resources :posts
   get 'landing/index'
   get '/dashboard'=>'landing#dashboard'
   devise_for :admin_users, ActiveAdmin::Devise.config

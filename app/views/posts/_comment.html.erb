@@ -1,0 +1,53 @@
+
+<div class="comment">
+  <div class="userDetail">
+
+    <div class="messages">
+      <%if comment.id%2==0%>
+      <div class="message">
+        <div class="triangle"></div>
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACqCAMAAAB4Z0YGAAAANlBMVEX///+xsbH6+vq0tLS5ubnp6em2trbR0dHk5OTKysrFxcW+vr7h4eHu7u7y8vLCwsLY2Nj29vYNiIMVAAADyElEQVR4nO2b27arMAhF6zXVqrX//7OnmrbqNuYCLuIZI/NlP3ZtIEAI3m6JRCKRSCQSiUQikUgkEolEIvG/M3SqLYssK8pWdX1sNZp7U2Yb6uYeW9Og6sxArYaIovrWpEnTVJFEvZpjUbOwVwxVY2FX9T4Bo7io4Tn/sEPYUzjEOqepPnSSqkZPUW8EHan8VWWZuqQqMV0BHtSI+PEeqirLBIrRYKw2dmp8Yn2Gq3rnL7SqjqIKnr5yggsn6hwqK/gUfoGexty35siai2wsrLkedFkPnKqerirLcFcPhg+RXmT4EOjFnKMqy1BnseLJQl2FWKGFCy7HBcxFA5JFah4WUG1E6f5pGyVIFrkgagqQLJ4qVIZgpq0kK8k65qIn8aJ5yzKS9AGV5S9aEy/aQRBv1F9QN2vWDQN4x+DJQqniNVy4qU3gdHILblbJinncLOnFkQWcCF5zBsEJLuQYnHGBRb7j0cduBXRKSa7WqDqtIbwVaLAvBlQvYn1I9iLWh+SzCH9PJzX0qDZ+gdSi4p/uSHVRYPWAEPTogJ8gtM4i20DBPSr8NXEmOEcIbdsEdl3ITmtNoLnEtrmCoksmsiaCzCW4xxUwu2nlVN0Gf1miq1Ledw2xxZ+Z3LORKMHt3188u2fxVU+vii1Ro7f4uFHahRMeySvK6qnzNMrvd844kqpkIl2TW1uJR4TA0gyWsK8jLlv3h+tcMVUd6yriLPMPXTNadJVa1dh0ckbLKzXHlJ7Rvgxx/9D3wnkCXKpKIvar5mcfrSvf5S+VL6pmj6JX+ge1OXuffFltDPb4aNhMBUqFu1hXu/z57abuv+7++e0ZdjZsMSarTMmz/cbNqxtVM3Zfm+SmCvA8X5hR1OQd409VB3n2ca4w2ycqanfQ9odgZd7zEprtZ97U40ZYPto3eff/Bo27s+Gr1c8GvXIOfcszOuncb55VtI1SqvUbRDdsg1XE3Wo75oPiD/Mx/xhO52rMPifRkh1p6/L4lMTmAhNWCwUpwO7MBSQPXYRMwVwR8SP4WV1EVbAuIVWBusRUBenCR/sK77jvJVV5391e4Hy1CNJ//L4ws08WEHhNK5gbgBQ8hoawnsGGs59gLtpRcYS9fGBpHOHF2mfjYH1WYH4yw8HS5fi+TSCwDMujuXDi0I0B714Ijppo5nc8XA6eaQW7GTPGHidmvGuMUR+l6mwx1CDqF9NnYvic+ALGMpjrCsYymOsSxtqbK/ox1PzZ1iPvk57N9h4UOcEvbFJ95Gq4Zl0ZLxLwE+tGIlKrbAK/oppIXJB/JQIxRHqeiukAAAAASUVORK5CYII="
+          class="avatar">
+        <p>
+          <strong>
+            <%= comment.user.email %>,<em>
+              posted
+              <%= time_ago_in_words(comment.created_at) %></em>
+          </strong>
+          <%= comment.content %></p>
+        <p>
+          <%if can? :update,comment%>
+          <%= link_to 'Edit', edit_comment_path(comment) ,params[id: comment.id]%>
+          <% end %>.
+          <%if can? :destroy,comment%>
+          <%= link_to "Delete", comment, method: :delete, data: {confirm: "Are you sure?"}%>
+          <% end %>
+        </p>
+      </div>
+      <%else%>
+      <div class="message inverse">
+        <div class="triangle"></div>
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACqCAMAAAB4Z0YGAAAANlBMVEX///+xsbH6+vq0tLS5ubnp6em2trbR0dHk5OTKysrFxcW+vr7h4eHu7u7y8vLCwsLY2Nj29vYNiIMVAAADyElEQVR4nO2b27arMAhF6zXVqrX//7OnmrbqNuYCLuIZI/NlP3ZtIEAI3m6JRCKRSCQSiUQikUgkEolEIvG/M3SqLYssK8pWdX1sNZp7U2Yb6uYeW9Og6sxArYaIovrWpEnTVJFEvZpjUbOwVwxVY2FX9T4Bo7io4Tn/sEPYUzjEOqepPnSSqkZPUW8EHan8VWWZuqQqMV0BHtSI+PEeqirLBIrRYKw2dmp8Yn2Gq3rnL7SqjqIKnr5yggsn6hwqK/gUfoGexty35siai2wsrLkedFkPnKqerirLcFcPhg+RXmT4EOjFnKMqy1BnseLJQl2FWKGFCy7HBcxFA5JFah4WUG1E6f5pGyVIFrkgagqQLJ4qVIZgpq0kK8k65qIn8aJ5yzKS9AGV5S9aEy/aQRBv1F9QN2vWDQN4x+DJQqniNVy4qU3gdHILblbJinncLOnFkQWcCF5zBsEJLuQYnHGBRb7j0cduBXRKSa7WqDqtIbwVaLAvBlQvYn1I9iLWh+SzCH9PJzX0qDZ+gdSi4p/uSHVRYPWAEPTogJ8gtM4i20DBPSr8NXEmOEcIbdsEdl3ITmtNoLnEtrmCoksmsiaCzCW4xxUwu2nlVN0Gf1miq1Ledw2xxZ+Z3LORKMHt3188u2fxVU+vii1Ro7f4uFHahRMeySvK6qnzNMrvd844kqpkIl2TW1uJR4TA0gyWsK8jLlv3h+tcMVUd6yriLPMPXTNadJVa1dh0ckbLKzXHlJ7Rvgxx/9D3wnkCXKpKIvar5mcfrSvf5S+VL6pmj6JX+ge1OXuffFltDPb4aNhMBUqFu1hXu/z57abuv+7++e0ZdjZsMSarTMmz/cbNqxtVM3Zfm+SmCvA8X5hR1OQd409VB3n2ca4w2ycqanfQ9odgZd7zEprtZ97U40ZYPto3eff/Bo27s+Gr1c8GvXIOfcszOuncb55VtI1SqvUbRDdsg1XE3Wo75oPiD/Mx/xhO52rMPifRkh1p6/L4lMTmAhNWCwUpwO7MBSQPXYRMwVwR8SP4WV1EVbAuIVWBusRUBenCR/sK77jvJVV5391e4Hy1CNJ//L4ws08WEHhNK5gbgBQ8hoawnsGGs59gLtpRcYS9fGBpHOHF2mfjYH1WYH4yw8HS5fi+TSCwDMujuXDi0I0B714Ijppo5nc8XA6eaQW7GTPGHidmvGuMUR+l6mwx1CDqF9NnYvic+ALGMpjrCsYymOsSxtqbK/ox1PzZ1iPvk57N9h4UOcEvbFJ95Gq4Zl0ZLxLwE+tGIlKrbAK/oppIXJB/JQIxRHqeiukAAAAASUVORK5CYII="
+          class="avatar">
+          <p>
+            <strong>
+              <%= comment.user.email %>,<em>
+                posted
+                <%= time_ago_in_words(comment.created_at) %></em>
+            </strong>
+            <%= comment.content %></p>
+          <p>
+            <%if can? :update,comment%>
+            <%= link_to 'Edit', edit_comment_path(comment) ,params[id: comment.id]%>
+            <% end %>.
+            <%if can? :destroy,comment%>
+            <%= link_to "Delete", comment, method: :delete, data: {confirm: "Are you sure?"}%>
+            <% end %>
+          </p>
+      </div>
+    </div>
+    <%end%>
+  </div>
+</div>
