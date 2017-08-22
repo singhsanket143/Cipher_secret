@@ -8,7 +8,8 @@ var a=("<%=@res%>");
 // console.log(typeof a );
 var y=a.split(",");
 console.log( y);
-x[0].innerHTML=y[0];
+var str=unescape(y[0].substring(7,y[0].length-7))
+x[0].innerHTML=str
 // data=JSON.parse("<%=@res%>");
 // var str=""
 // var data=("<%=@res%>");
