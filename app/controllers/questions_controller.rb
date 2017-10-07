@@ -14,15 +14,25 @@ class QuestionsController < ApplicationController
     @langs = HTTParty.get('http://api.hackerrank.com/checker/languages.json')
     @names = @langs["languages"]["names"]
     @codes = @langs["languages"]["codes"]
+    # byebug
     # @ques=Question.find(params[:questions_id])
     # @question=Question.where(id: params[:id]).first
   end
 
   def evaluate
+    # byebug
+    v=params.permit("quesid")
     permitted = params.permit("source","lang","testcases","api_key","format")
     response = HTTParty.post("http://api.hackerrank.com/checker/submission.json",:body => permitted);
     @val=JSON.parse(response.body)
     # return redirect_to '/solve'
+    subm=Submission.new
+    subm.code=permitted["source"]
+    subm.user_id=current_user.id;
+    # byebug
+    subm.question_id=params=v["quesid"]
+    subm.isCorrect=false
+    subm.save!
     @err=response.code
     @res=@val["result"]["stdout"];
     @cases=params["outtestcases"]

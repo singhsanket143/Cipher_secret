@@ -876,6 +876,7 @@
           <%= hidden_field_tag 'testcases',(@question.inputtestcases)%>
           <%= hidden_field_tag 'outtestcases',(@question.outputtestcases)%>
           <!-- <div class="new" -->
+          <%= hidden_field_tag 'quesid',(@question.id)%>
           <%= select_tag 'format', options_for_select(["JSON","XML"]) %>
           <%= hidden_field_tag 'api_key','hackerrank|2357374-1588|c8cb820f84f230248f9117b777b64f017d2cad2f' %>
 
